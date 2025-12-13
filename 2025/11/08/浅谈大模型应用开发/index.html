@@ -6,15 +6,37 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>赵文琦的博客</title>
+  <title>浅谈大模型应用开发 | 赵文琦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="赵文琦的博客">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="时间：2025.10.25 分享人：赵文琦 1 理论体系背景1.1 问题域问题：有了LLMs，为什么需要开发大模型应用？ 在大语言模型（LLM）如 ChatGPT、Claude、DeepSeek 等快速发展的今天，开发者不仅希望能“使用”这些模型，还希望能将它们灵活集成到自己的应用中，实现更强大的对话能力、检索增强生成 （RAG）、工具调用（Tool Calling）、多轮推理等功能。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈大模型应用开发">
+<meta property="og:url" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/index.html">
 <meta property="og:site_name" content="赵文琦的博客">
+<meta property="og:description" content="时间：2025.10.25 分享人：赵文琦 1 理论体系背景1.1 问题域问题：有了LLMs，为什么需要开发大模型应用？ 在大语言模型（LLM）如 ChatGPT、Claude、DeepSeek 等快速发展的今天，开发者不仅希望能“使用”这些模型，还希望能将它们灵活集成到自己的应用中，实现更强大的对话能力、检索增强生成 （RAG）、工具调用（Tool Calling）、多轮推理等功能。">
 <meta property="og:locale">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/1.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/2.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/3.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/4.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/5.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/6.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/7.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/8.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/9.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/10.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/11.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/12.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/13.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/14.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/15.PNG">
+<meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/16.PNG">
+<meta property="article:published_time" content="2025-11-08T13:01:20.000Z">
+<meta property="article:modified_time" content="2025-12-13T13:51:13.014Z">
 <meta property="article:author" content="赵文琦">
+<meta property="article:tag" content="大模型应用开发">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/1.PNG">
   
     <link rel="alternative" href="/atom.xml" title="赵文琦的博客" type="application/atom+xml">
   
@@ -144,16 +166,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-浅谈大模型应用开发" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-浅谈大模型应用开发" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/">浅谈大模型应用开发</a>
+    <h1 class="article-title" itemprop="name">
+      浅谈大模型应用开发
     </h1>
   
 
@@ -170,11 +190,356 @@
 <p>分享人：赵文琦</p>
 <h2 id="1-理论体系背景"><a href="#1-理论体系背景" class="headerlink" title="1 理论体系背景"></a>1 理论体系背景</h2><h3 id="1-1-问题域"><a href="#1-1-问题域" class="headerlink" title="1.1 问题域"></a>1.1 问题域</h3><p><strong>问题：有了LLMs，为什么需要开发大模型应用？</strong></p>
 <p>在大语言模型（LLM）如 ChatGPT、Claude、DeepSeek 等快速发展的今天，开发者不仅希望能“使用”这些模型，还希望能将它们灵活集成到自己的应用中，实现更强大的对话能力、检索增强生成 （RAG）、工具调用（Tool Calling）、多轮推理等功能。</p>
-        
-          <a class="article-more-a" href="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/#more">more >></a>
-        
+<span id="more"></span>
+
+<p><img src="1.PNG" alt="1"></p>
+<h2 id="2-大模型应用开发"><a href="#2-大模型应用开发" class="headerlink" title="2.大模型应用开发"></a>2.大模型应用开发</h2><p>大模型应用技术特点：门槛低，天花板高。</p>
+<h3 id="2-1-基于RAG架构的开发"><a href="#2-1-基于RAG架构的开发" class="headerlink" title="2.1 基于RAG架构的开发"></a><strong>2.1 基于RAG架构的开发</strong></h3><p><strong>背景：</strong> </p>
+<ul>
+<li>大模型的知识冻结 </li>
+<li>大模型幻觉</li>
+</ul>
+<p>而RAG就可以非常精准的解决这两个问题。</p>
+<p><strong>举例：</strong></p>
+<p>LLM在考试的时候面对陌生的领域，答复能力有限，然后就准备放飞自我了。而此时RAG给了一些提示和思路，让LLM懂了开始往这个提示的方向做，最终考试的正确率从60%到了90%！ </p>
+<p><strong>何为RAG？</strong></p>
+<p>Retrieval-Augmented Generation（检索增强生成）</p>
+<p>第一阶段：知识库构建（1 -&gt; 6）</p>
+<p>第二阶段：问答（7 -&gt; 15）</p>
+<p><img src="2.PNG" alt="2"></p>
+<p><strong>检索-增强-生成过程：检索可以理解为第10步，增强理解为第12步（这里的提示词包含检索到的数据），生成理解为第15步。</strong></p>
+<p>类似的细节图：</p>
+<p><img src="3.PNG" alt="3"></p>
+<p><strong>RAG的优缺点</strong></p>
+<p>RAG的优点 </p>
+<ol>
+<li>相比提示词工程，RAG有更丰富的上下文和数据样本，可以不需要用户提供过多的背景描述，就能生成比较符合用户预期的答案。 </li>
+<li>相比于模型微调，RAG可以提升问答内容的时效性和可靠性 </li>
+<li>在一定程度上保护了数据的隐私性。</li>
+</ol>
+<p>RAG的缺点 </p>
+<ol>
+<li>由于每次问答都涉及外部系统数据检索，因此RAG的响应时延相对较高。</li>
+<li>引用的外部知识数据会消耗大量的模型Token资源。</li>
+</ol>
+<h3 id="2-2-基于Agent架构的开发"><a href="#2-2-基于Agent架构的开发" class="headerlink" title="2.2 基于Agent架构的开发"></a><strong>2.2 基于Agent架构的开发</strong></h3><p>充分利用 LLM 的推理决策能力，通过增加<strong>规划、记忆和工具</strong>调用的能力，构造一个能够独立思考、逐步完成给定目标的智能体。</p>
+<p><img src="4.PNG" alt="4"></p>
+<p>​				<strong>Agent &#x3D;</strong> <strong>LLM</strong> <strong>+ Memory + Tools + Planning +  Action</strong></p>
+<p><strong>智能体核心要素被细化为以下模块：</strong></p>
+<p>**1、大模型（LLM）作为“大脑”：**提供推理、规划和知识理解能力，是AI Agent的决策中枢。</p>
+<p><strong>2、记忆（Memory）</strong>  记忆机制能让智能体在处理重复⼯作时调⽤以前的经验，从而避免⽤⼾进⾏⼤量重复交互。</p>
+<ul>
+<li>短期记忆：存储单次对话周期的上下文信息，属于临时信息存储机制。受限于模型的上下文窗口长度。</li>
+<li>长期记忆：可以横跨多个任务或时间周期，可存储并调用核心知识，非即时任务。 长期记忆，可以通过模型参数微调（固化知识）、知识图谱（结构化语义网络）或向量数据库 （相似性检索）方式实现。</li>
+</ul>
+<p><strong>3、工具使用（Tool Use）</strong>：调用外部工具（如API、数据库）扩展能力边界。</p>
+<p>**4、规划决策（Planning）：**通过任务分解、反思与自省框架实现复杂任务处理。例如，利用思维链 （Chain of Thought）将目标拆解为子任务，并通过反馈优化策略。</p>
+<p>**5、行动（Action）：**实际执行决策的模块，涵盖软件接口操作（如自动订票）和物理交互（如机器人 执行搬运）。比如：检索、推理、编程等</p>
+<h2 id="3-大模型应用开发框架——LangChain"><a href="#3-大模型应用开发框架——LangChain" class="headerlink" title="3.大模型应用开发框架——LangChain"></a>3.大模型应用开发框架——LangChain</h2><h3 id="3-1-介绍是LangChain"><a href="#3-1-介绍是LangChain" class="headerlink" title="3.1 介绍是LangChain"></a>3.1 介绍是LangChain</h3><p>LangChain是 2022年10月 ，由哈佛大学的 Harrison Chase （哈里森·蔡斯）发起研发的一个开源框架， 用于开发由大语言模型（LLMs）驱动的应用程序。 </p>
+<p>比如，搭建“智能体”（Agent）、问答系统（QA）、对话机器人、文档搜索系统、企业私有知识库等.</p>
+<p>截止到2025年7月26日，GitHub统计数据：</p>
+<p><img src="5.PNG" alt="5"></p>
+<ul>
+<li><code>LangChain</code> ：这些工具里出现最早、最成熟的，适合复杂任务分解和单智能体应用 。</li>
+<li><code>LlamaIndex </code>：专注于高效的索引和检索，适合 RAG 场景。</li>
+<li><code>LangChain4J </code>：LangChain还出了Java、JavaScript（LangChain.js）两个语言的版本，LangChain4j的功能略少于LangChain，但是主要的核心功能都是有的。</li>
+<li><code>SpringAI/SpringAI Alibaba</code> ：有待进一步成熟，此外只是简单的对于一些接口进行了封装。</li>
+<li><code>SemanticKernel</code> ：也称为sk，微软推出的。</li>
+</ul>
+<h3 id="3-2-LangChain的核心组件"><a href="#3-2-LangChain的核心组件" class="headerlink" title="3.2 LangChain的核心组件"></a>3.2 LangChain的核心组件</h3><h4 id="3-2-1-Model-I-O"><a href="#3-2-1-Model-I-O" class="headerlink" title="3.2.1 Model I&#x2F;O"></a>3.2.1 Model I&#x2F;O</h4><p>Model I&#x2F;O 模块是与语言模型（LLMs）进行交互的核心组件，包括输入提示(Format)、调用模型(Predict)、输出解析(Parse)。</p>
+<p><strong>调用模型：</strong></p>
+<p>可以调用第三方平台模型或本地部署大模型</p>
+<p>模型功能分类：</p>
+<p>非对话模型（LLMs、Text Model）</p>
+<p>对话模型（Chat Models）</p>
+<p>嵌入模型（Embedding Models）</p>
+<p><img src="6.PNG" alt="6"></p>
+<p><strong>Prompt Template提示词模板</strong></p>
+<p>有几种不同类型的提示模板：</p>
+<ul>
+<li><code>PromptTemplate </code>：LLM提示模板，用于生成字符串提示。它使用 Python 的字符串来模板提示。 </li>
+<li><code>ChatPromptTemplate </code>：聊天提示模板，用于组合各种角色的消息模板，传入聊天模型。 </li>
+<li><code>XxxMessagePromptTemplate </code>：消息模板词模板，包括：SystemMessagePromptTemplate、HumanMessagePromptTemplate、AIMessagePromptTemplate、 ChatMessagePromptTemplate等 </li>
+<li><code>FewShotPromptTemplate </code>：样本提示词模板，通过示例来教模型如何回答 </li>
+<li><code>PipelinePrompt </code>：管道提示词模板，用于把几个提示词组合在一起使用。 </li>
+<li><code>自定义模板</code>：允许基于其它模板类来定制自己的提示词模板。</li>
+</ul>
+<p><strong>Output</strong> <strong>Parsers输出解析器</strong></p>
+<p>LangChain有许多不同类型的输出解析器 ：</p>
+<ul>
+<li><code>StrOutputParser </code>：字符串解析器 </li>
+<li><code>JsonOutputParser </code>：JSON解析器，确保输出符合特定JSON对象格式 </li>
+<li><code>XMLOutputParser </code>：XML解析器，允许以流行的XML格式从LLM获取结果 </li>
+<li><code>CommaSeparatedListOutputParser </code>：CSV解析器，模型的输出以逗号分隔，以列表形式返回输出 </li>
+<li><code>DatetimeOutputParser </code>：日期时间解析器，可用于将 LLM 输出解析为日期时间格式</li>
+</ul>
+<h4 id="3-2-2-Chains"><a href="#3-2-2-Chains" class="headerlink" title="3.2.2 Chains"></a>3.2.2 Chains</h4><p><strong>基本概念：</strong></p>
+<p>Chain：链，用于将多个组件（提示模板、LLM模型、记忆、工具等）连接起来，形成可复用的流，完成复杂的任务。</p>
+<p><strong>Chain 的核心思想</strong>是通过组合不同的模块化单元，实现比单一组件更强大的功能。比如：</p>
+<p>将LLM与 Prompt Template （提示模板）结合 </p>
+<p>将LLM与 输出解析器结合 </p>
+<p>将LLM与 外部数据结合，例如用于问答 </p>
+<p>将LLM与 长期记忆结合，例如用于聊天历史记录</p>
+<p>通过将第一个LLM的输出作为第二个LLM 的输入，…，将多个LLM按顺序结合在一起</p>
+<h4 id="3-2-3-Memory"><a href="#3-2-3-Memory" class="headerlink" title="3.2.3 Memory"></a>3.2.3 Memory</h4><p><strong>为什么需要Memory？</strong></p>
+<p>模型本身是不会记忆任何上下文的，只能依靠用户本身的输入去产生输出。 </p>
+<p><strong>如何实现记忆功能？</strong></p>
+<p>实现这个记忆功能，就需要<strong>额外的模块</strong>去保存我们和模型对话的上下文信息，然后在下一次请求时，把所有的历史信息都输入给模型，让模型输出最终结果。 而在LangChain中，提供这个功能的模块就称为<strong>Memory(记忆)</strong> ，用于存储用户和模型交互的历史信息。</p>
+<p><strong>Memory的设计理念</strong></p>
+<p>Memory，是LangChain中用于多轮对话中保存和管理上下文信息（比如文本、图像、音频等）的组 件。它让应用能够记住用户之前说了什么，从而实现对话的 感知的链式对话系统提供了基础。</p>
+<p><img src="7.PNG" alt="7"></p>
+<ol>
+<li>输入问题：({“question”: …}) </li>
+<li>读取历史消息：从Memory中READ历史消息（{“past_messages”: […]}） </li>
+<li>构建提示（Prompt)：读取到的历史消息和当前问题会被合并，构建一个新的Prompt  </li>
+<li>模型处理：构建好的提示会被传递给语言模型进行处理。语言模型根据提示生成一个输出。 </li>
+<li>解析输出：输出解析器通过正则表达式 regex(“Answer: (.*)”)来解析，返回一个回答（{“answer”:  …}）给用户 </li>
+<li>得到回复并写入Memory：新生成的回答会与当前的问题一起写入Memory，更新对话历史。 Memory会存储最新的对话内容，为后续的对话提供上下文支持。</li>
+</ol>
+<p><strong>Memory模块的设计思路：</strong></p>
+<p>层次1(最直接的方式)：保留一个聊天消息列表 </p>
+<p>层次2(简单的新思路)：只返回最近交互的k条消息 </p>
+<p>层次3(稍微复杂一点)：返回过去k条消息的简洁摘要 </p>
+<p>层次4(更复杂)：从存储的消息中提取实体，并且仅返回有关当前运行中引用的实体的信息</p>
+<p>针对上述情况，LangChain构建了一些可以直接使用的 <code>Memory</code>工具，用于存储聊天消息的一系列集成。</p>
+<p><img src="8.PNG" alt="8"></p>
+<h4 id="3-2-4-Tools"><a href="#3-2-4-Tools" class="headerlink" title="3.2.4 Tools"></a>3.2.4 Tools</h4><p>Tools 用于扩展大语言模型（LLM）的能力，使其能够与外部系统、API 或自定义函数交互，从而完成仅靠文本生成无法实现的任务（如搜索、计算、数据库查询等）。</p>
+<p><strong>Tool 的要素：</strong></p>
+<ul>
+<li>name ：工具的名称 </li>
+<li>description ：工具的功能描述 </li>
+<li>该工具输入的 JSON模式 </li>
+<li>要调用的函数</li>
+<li>return_direct ：是否应将工具结果直接返回给用户（仅对Agent相关）</li>
+</ul>
+<p><img src="9.PNG" alt="9"></p>
+<p><strong>实操步骤：</strong> </p>
+<p>步骤1：将name、description 和 JSON模式作为上下文提供给LLM </p>
+<p>步骤2：LLM会根据提示词推断出需要调用哪些工具，并提供具体的调用参数信息 </p>
+<p>步骤3：用户需要根据返回的工具调用信息，自行触发相关工具的回调</p>
+<p>调用工具说明</p>
+<p>情况1：大模型决定调用工具 </p>
+<p>如果模型认为需要调用工具（如  MoveFileTool ），返回的  message 会包含： </p>
+<ul>
+<li>content : 通常为空（因为模型选择调用工具，而非生成自然语言回复）。 </li>
+<li>additional_kwargs : 包含工具调用的详细信息</li>
+</ul>
+<p>情况2：大模型不调用工具 </p>
+<ul>
+<li>如果模型认为无需调用工具（例如用户输入与工具无关），返回的会是普通文本回复</li>
+</ul>
+<h4 id="3-2-5-Agents"><a href="#3-2-5-Agents" class="headerlink" title="3.2.5 Agents"></a>3.2.5 Agents</h4><p>通用人工智能（AGI）将是AI的终极形态，几乎已成为业界共识。同样，构建智能体（Agent）则是AI工程应用当下的“终极形态”。</p>
+<p><strong>（1）什么是Agent?</strong></p>
+<p>Agent（智能体） 是一个通过动态协调大语言模型（LLM）和工具（Tools） 来完成复杂任务的智能系统。它让LLM充当”决策大脑”，根据用户输入自主选择和执行工具（如搜索、计算、数据库查询等）， 最终生成精准的响应。</p>
+<p><img src="10.PNG" alt="10"></p>
+<p><strong>（2）Agent、AgentExecutor的创建:</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>环节1：创建Agent</th>
+<th>环节2：创建 AgentExecutor</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>方式1:</td>
+<td>使用 AgentType 指定</td>
+<td>initialize_agent()</td>
+</tr>
+<tr>
+<td>方式2:(更通用)</td>
+<td>create_xxx_agent() 比如：create_react_agent()、create_tool_calling_agent()</td>
+<td>调用AgentExecutor() 构造方法</td>
+</tr>
+</tbody></table>
+<p><strong>（3）Agent的类型:</strong></p>
+<p><code>FUNCATION_CALL</code>模式</p>
+<ul>
+<li>基于结构化函数调用（如 OpenAI Function Calling） </li>
+<li>直接生成工具调用参数（ JSON 格式 ） 效率更高，</li>
+<li>适合工具明确的场景</li>
+</ul>
+<p><code>ReAct</code> 模式</p>
+<ul>
+<li>基于 文本推理 的链式思考（Reasoning + Acting），具备反思和自我纠错能力。 <ul>
+<li>推理（Reasoning）：分析当前状态，决定下一步行动 </li>
+<li>行动（Acting）：调用工具并返回结果</li>
+</ul>
+</li>
+<li>通过自然语言描述决策过程 </li>
+<li>适合需要明确推理步骤的场景。例如智能客服、问答系统、任务执行等。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Function Call模式</th>
+<th>ReAct 模式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>底层机制</td>
+<td>结构化函数调用</td>
+<td>自然语言推理</td>
+</tr>
+<tr>
+<td>输出格式</td>
+<td>JSON&#x2F;结构化数据</td>
+<td>自由文本</td>
+</tr>
+<tr>
+<td>适合场景</td>
+<td>需要高效工具调用</td>
+<td>需要解释决策过程</td>
+</tr>
+<tr>
+<td>延迟</td>
+<td>较低（直接参数化调用）</td>
+<td>较高（需生成完整文本）</td>
+</tr>
+</tbody></table>
+<h4 id="3-2-6-Retrieval"><a href="#3-2-6-Retrieval" class="headerlink" title="3.2.6 Retrieval"></a>3.2.6 Retrieval</h4><p><strong>（1）Retrieval模块的设计意义</strong></p>
+<ul>
+<li>大模型的幻觉问题：在专有领域，LLM无法学习到所有的专业知识细节，因此在 面向专业领域知识的提问时，无法给出 可靠准确的回答，甚至会“胡言乱语”，这种现象称之为 LLM的“幻觉”。</li>
+<li>RAG的解决方案：当应用需求集中在利用大模型去 回答特定私有领域的知识，且知识库足够大，那么除了 型外， RAG 就是非常有效的一种缓解大模型推理的“幻觉”问题的解决方案。Retrieval对这一流程提供了解决方案。</li>
+</ul>
+<p><strong>（2）Retrieval流程</strong></p>
+<p><img src="11.PNG" alt="11"></p>
+<p><strong>环节1：Source（数据源）</strong></p>
+<p>指的是RAG架构中所外挂的知识库。这里有三点说明： </p>
+<ol>
+<li>原始数据源类型多样：如：视频、图片、文本、代码、文档等 </li>
+<li>形式的多样性： <ol>
+<li>可以是上百个.csv文件，可以是上千个.json文件，也可以是上万个.pdf文件 </li>
+<li>可以是某一个业务流程外放的API，可以是某个网站的实时数据等</li>
+</ol>
+</li>
+</ol>
+<p><strong>环节2：Load（加载）</strong></p>
+<p><strong>环节3：Transform（转换）</strong></p>
+<p>Text Splitting（文档拆分）</p>
+<ul>
+<li><code>拆分/分块的必要性</code>：前一个环节加载后的文档对象可以直接传入文档拆分器进行拆分，而文档切块后才能向量化并存入数据库中</li>
+<li><code>文档拆分器的多样性</code>：LangChain提供了丰富的文档拆分器，不仅能够切分普通文本，还能切分 Markdown、JSON、HTML、代码等特殊格式的文本。 </li>
+<li><code>拆分/分块的挑战性</code>：实际拆分操作中需要处理许多细节问题， 不同类型的文本、 不同的使用场景都，需要采用不同的分块策略。 <ul>
+<li>可以按照数据类型进行切片处理，比如针对文本类数据，可以直接按照字符、段落进行切片；代码类数据则需要进一步细分以保证代码的功能性； </li>
+<li>可以直接根据 token 进行切片处理</li>
+</ul>
+</li>
+</ul>
+<p><strong>在构建RAG应用程序的整个流程中，拆分&#x2F;分块是最具挑战性的环节之一，它显著影响检索效果</strong>。目前还没有通用的方法可以明确指出哪一种分块策略最为有效。不同的使用场景和数据类型都会影响分块策略的选择。</p>
+<p><strong>环节4：Embed（嵌入）</strong></p>
+<p>文档嵌入模型（Text Embedding Models）负责将文本转换为向量表示，即模型赋予了文本计算机可理解的数值表示</p>
+<p><strong>环节5：Store（存储）</strong></p>
+<p><strong>环节6：Retrieve（检索）</strong></p>
+<h1 id="2-相关技术体系"><a href="#2-相关技术体系" class="headerlink" title="2 相关技术体系"></a>2 相关技术体系</h1><h2 id="低代码平台"><a href="#低代码平台" class="headerlink" title="低代码平台"></a>低代码平台</h2><p>Dify：</p>
+<p>Dify是一个开源的大语言模型（LLM）应用开发平台，旨在简化和加速生成式AI应用的创建和部署。该平台结合了后端即服务（Backend as Service, BaaS）和LLMOps的理念，为开发者提供了一个用户友好的界面和一系列强大的工具 ，使他们能够快速搭建生产级的AI应用。</p>
+<p><img src="12.PNG" alt="12"></p>
+<table>
+<thead>
+<tr>
+<th>特性维度</th>
+<th>LangChain</th>
+<th>Dify (代表低代码平台)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>核心定位</td>
+<td>开发框架</td>
+<td>AI应用平台</td>
+</tr>
+<tr>
+<td>灵活性 &amp; 控制力</td>
+<td>极高。可以自定义每一个环节，集成任何库，实现极其复杂和特定的逻辑。</td>
+<td>受限。受限于平台提供的组件和功能，对于平台未支持的场景难以实现。</td>
+</tr>
+<tr>
+<td>学习曲线</td>
+<td>陡峭。需要具备编程能力，并理解LangChain的核心概念（Chain, Agent, Tool, Memory等）。</td>
+<td>平缓。对非技术人员友好，只需理解AI应用的基本概念即可上手。</td>
+</tr>
+<tr>
+<td>开发速度</td>
+<td>较慢。从零开始构建，需要编写、测试和调试代码。</td>
+<td>极快。通过可视化工作流和预置模板，几分钟到几小时就能搭建一个可用的应用。</td>
+</tr>
+<tr>
+<td>部署与运维</td>
+<td>自行负责。需要自己搭建服务器、配置环境、处理监控和扩展。</td>
+<td>平台托管。提供一键部署、监控、日志分析、版本管理等生产级功能。</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>1.研究和实验新的AI应用范式。 2. 构建高度定制化、复杂的企业级系统。 3. 需要与特定或老旧系统深度集成。 4. 开发全新的Agent或Chain逻辑。</td>
+<td>1.快速构建MVP或内部工具。 2. 让产品经理、运营人员等非技术人员也能创建AI应用。 3. 构建标准的聊天机器人、知识库问答、文本生成等应用。 4. 追求快速上线和迭代</td>
+</tr>
+</tbody></table>
+<h3 id="如何选择？"><a href="#如何选择？" class="headerlink" title="如何选择？"></a>如何选择？</h3><h4 id="选择-LangChain-当："><a href="#选择-LangChain-当：" class="headerlink" title="选择 LangChain 当："></a>选择 LangChain 当：</h4><ul>
+<li>你是开发者或技术团队，并且希望拥有对应用的完全控制权。</li>
+<li>你的需求非常独特或复杂，超出了低代码平台的能力范围（例如，需要设计一个具有复杂推理步骤的自主Agent）。</li>
+<li>你需要将AI能力深度集成到已有的复杂代码库或架构中。</li>
+<li>你正在探索AI应用的边界，而不仅仅是使用现成的模式。</li>
+</ul>
+<h4 id="选择-Dify-等低代码平台当："><a href="#选择-Dify-等低代码平台当：" class="headerlink" title="选择 Dify 等低代码平台当："></a>选择 Dify 等低代码平台当：</h4><ul>
+<li>你希望快速验证一个想法，构建一个可用的原型或最小可行产品。</li>
+<li>你的团队中缺乏强大的开发资源，或者希望让业务人员直接参与应用创建。</li>
+<li>你的应用场景是常见且标准的（如基于文档的问答、内容摘要、简单聊天机器人）。</li>
+<li>你不想操心基础设施、部署和运维的麻烦，希望开箱即用。</li>
+</ul>
+<h1 id="3-应用场景"><a href="#3-应用场景" class="headerlink" title="3 应用场景"></a>3 应用场景</h1><h3 id="大模型应用开发的4个场景"><a href="#大模型应用开发的4个场景" class="headerlink" title="大模型应用开发的4个场景"></a>大模型应用开发的4个场景</h3><p><strong>场景1：纯 Prompt</strong>  </p>
+<p>Prompt是操作大模型的唯一接口 </p>
+<p>当人看：你说一句，ta回一句，你再说一句，ta再回一句… </p>
+<p><strong>场景2：Agent + Function Calling</strong> </p>
+<p>Agent：AI 主动提要求 </p>
+<p>Function Calling：需要对接外部系统时，AI 要求执行某个函数 </p>
+<p>当人看：你问 ta「我明天去杭州出差，要带伞吗？」，ta 让你先看天气预报，你看了告诉ta，ta 再告诉你要不要带伞 </p>
+<p><strong>场景3：RAG (Retrieval-Augmented Generation)</strong>  </p>
+<p>RAG：需要补充领域知识时使用 </p>
+<p>Embeddings：把文字转换为更易于相似度计算的编码。这种编码叫向量 </p>
+<p>向量数据库：把向量存起来，方便查找 </p>
+<p>向量搜索：根据输入向量，找到最相似的向量</p>
+<p><strong>场景4：Fine-tuning(精调&#x2F;微调)</strong>  </p>
+<p>举例：努力学习考试内容，长期记住，活学活用。</p>
+<p><img src="13.PNG" alt="13"></p>
+<h3 id="铁塔项目利用大模型进行数据预处理："><a href="#铁塔项目利用大模型进行数据预处理：" class="headerlink" title="铁塔项目利用大模型进行数据预处理："></a>铁塔项目利用大模型进行数据预处理：</h3><p><img src="14.PNG" alt="14"></p>
+<table>
+<thead>
+<tr>
+<th align="center">处理前</th>
+<th align="center">处理后</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><img src="15.PNG" alt="15"></td>
+<td align="center"><img src="16.PNG" alt="16"></td>
+</tr>
+</tbody></table>
+<h1 id="5-总结与展望"><a href="#5-总结与展望" class="headerlink" title="5 总结与展望"></a>5 总结与展望</h1><p>本次属于一次技术交流，主要跟大家交流大模型应用开发的流程以及应用场景，目前大模型可以赋能在许多场景下。真正的潜力，在于我们将自身的业务理解与这些技术进行碰撞和结合。 目前在我们各个项目的实际工作中，都蕴藏着大量可以被AI优化的环节</p>
+<p>同时大模型对传统前后端开发的岗位冲击很大，使得代码实现变得越来越容易，**未来的开发者不再是纯粹的“码农”，而是要成为大模型的“指挥家”、AI应用的“架构师”、问题的“定义者”。**所以我们非常有必要掌握一些大模型应用开发的知识，提升自己的个人竞争力，或者直接all in大模型应用开发岗。</p>
+
       
 
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
       
     </div>
     <div class="article-info article-info-index">
@@ -194,16 +559,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">代理模式、外观模式和中介者模式区别</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -223,478 +647,14 @@
 
 
 
-
   
-    <article id="post-代理模式、外观模式和中介者模式区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/">代理模式、外观模式和中介者模式区别</a>
-    </h1>
   
 
-        
-        <a href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2025-04-25T09:33:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-25</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-代理模式："><a href="#1-代理模式：" class="headerlink" title="1.代理模式："></a>1.代理模式：</h2><p>代理模式通过引入一个代理对象来控制对原对象的访问。代理对象在客户端和目标对象之间充当中介，负责将客户端的请求转发给目标对象，同时可以在转发请求前后进行额外的处理。</p>
-<h5 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h5><ul>
-<li>当需要在访问一个对象时进行一些控制或额外处理时。</li>
-</ul>
-        
-          <a class="article-more-a" href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-浅谈设计模式中的代理模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">浅谈设计模式中的代理模式</a>
-    </h1>
   
 
-        
-        <a href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2025-04-22T10:55:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-理论体系背景"><a href="#1-理论体系背景" class="headerlink" title="1 理论体系背景"></a>1 理论体系背景</h2><h3 id="1-1-问题域"><a href="#1-1-问题域" class="headerlink" title="1.1 问题域"></a>1.1 问题域</h3><p>​		某些场景下，我们在直接访问对象时可能遇到问题，例如，当需要访问的对象位于远程机器上时，或者某些对象的创建开销很大，又或者某些操作需要安全控制，直接访问这些对象可能会给使用者或系统结构带来诸多不便。<strong>代理模式能够处理远程访问、创建开销高、访问安全控制等问题，实现灵活的系统结构</strong>。</p>
-        
-          <a class="article-more-a" href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-vue中v-model语法糖详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/08/31/vue%E4%B8%ADv-model%E8%AF%AD%E6%B3%95%E7%B3%96%E8%AF%A6%E8%A7%A3/">vue中v-model语法糖详解</a>
-    </h1>
   
 
-        
-        <a href="/2024/08/31/vue%E4%B8%ADv-model%E8%AF%AD%E6%B3%95%E7%B3%96%E8%AF%A6%E8%A7%A3/" class="archive-article-date">
-  	<time datetime="2024-08-31T08:39:03.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-基本用法"><a href="#1-基本用法" class="headerlink" title="1. 基本用法"></a>1. 基本用法</h2><p>v-model 是 Vue.js 中的一个重要指令，用于在表单输入和应用状态之间建立双向绑定。它简化了用户输入和应用程序数据之间的同步过程。</p>
-<p>v-model 可以在各种表单元素上使用，如 <code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code>、<code>&lt;select&gt;</code> 等。它会根据元素的类型自动选择正确的方法来更新数据。</p>
-        
-          <a class="article-more-a" href="/2024/08/31/vue%E4%B8%ADv-model%E8%AF%AD%E6%B3%95%E7%B3%96%E8%AF%A6%E8%A7%A3/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/08/31/vue%E4%B8%ADv-model%E8%AF%AD%E6%B3%95%E7%B3%96%E8%AF%A6%E8%A7%A3/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Vue-Router-传参方式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/08/31/Vue-Router-%E4%BC%A0%E5%8F%82%E6%96%B9%E5%BC%8F/">Vue Router 传参方式</a>
-    </h1>
-  
-
-        
-        <a href="/2024/08/31/Vue-Router-%E4%BC%A0%E5%8F%82%E6%96%B9%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2024-08-31T08:38:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-08-31</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-动态路由传参（params）"><a href="#1-动态路由传参（params）" class="headerlink" title="1.动态路由传参（params）"></a><strong>1.动态路由传参（params）</strong></h4><p><strong>（1）定义路由</strong>（路径参数用 <code>:</code> 标记）：</p>
-<p><em></em></p>
-        
-          <a class="article-more-a" href="/2024/08/31/Vue-Router-%E4%BC%A0%E5%8F%82%E6%96%B9%E5%BC%8F/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">vue</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/08/31/Vue-Router-%E4%BC%A0%E5%8F%82%E6%96%B9%E5%BC%8F/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Linux-常用命令总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/07/17/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">Linux 常用命令总结</a>
-    </h1>
-  
-
-        
-        <a href="/2024/07/17/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/" class="archive-article-date">
-  	<time datetime="2024-07-17T08:40:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="文件和目录操作"><a href="#文件和目录操作" class="headerlink" title="文件和目录操作"></a>文件和目录操作</h4><ul>
-<li><p><strong>cd</strong>：用于切换当前工作目录。可以通过绝对路径或相对路径指定目标目录。</p>
-<ul>
-<li><p><code>cd /home</code> 进入 <code>/home</code> 目录。</p>
-</li>
-<li><p><code>cd ../</code> 返回上一级目录。、</p></li></ul></li></ul>
-        
-          <a class="article-more-a" href="/2024/07/17/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">linux</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/07/17/Linux-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-conda管理虚拟环境常用命令" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2024/07/10/conda%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">conda管理虚拟环境常用命令</a>
-    </h1>
-  
-
-        
-        <a href="/2024/07/10/conda%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="archive-article-date">
-  	<time datetime="2024-07-10T11:01:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-07-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>1.创建新环境：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create --name &lt;env_name&gt; python=&lt;version&gt; <span class="comment">#--name可以简写为-n</span></span><br></pre></td></tr></table></figure>
-
-<p>示例：创建一个名为env的虚拟环境，python版本为3.9</p>
-<p><em></em></p>
-        
-          <a class="article-more-a" href="/2024/07/10/conda%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">conda</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2024/07/10/conda%E7%AE%A1%E7%90%86%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -719,8 +679,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
