@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/15.PNG">
 <meta property="og:image" content="http://example.com/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/16.PNG">
 <meta property="article:published_time" content="2025-11-08T13:01:20.000Z">
-<meta property="article:modified_time" content="2025-12-13T14:00:21.275Z">
+<meta property="article:modified_time" content="2025-12-13T14:12:00.409Z">
 <meta property="article:author" content="赵文琦">
 <meta property="article:tag" content="大模型应用开发">
 <meta name="twitter:card" content="summary">
@@ -226,15 +226,15 @@
 <p><img src="4.PNG" alt="4"></p>
 <p>​				<strong>Agent &#x3D;</strong> <strong>LLM</strong> <strong>+ Memory + Tools + Planning +  Action</strong></p>
 <p><strong>智能体核心要素被细化为以下模块：</strong></p>
-<p>**1、大模型（LLM）作为“大脑”：**提供推理、规划和知识理解能力，是AI Agent的决策中枢。</p>
-<p><strong>2、记忆（Memory）</strong>  记忆机制能让智能体在处理重复⼯作时调⽤以前的经验，从而避免⽤⼾进⾏⼤量重复交互。</p>
+<p><strong>1、大模型（LLM）作为“大脑”</strong>：提供推理、规划和知识理解能力，是AI Agent的决策中枢。</p>
+<p><strong>2、记忆（Memory）</strong>：  记忆机制能让智能体在处理重复⼯作时调⽤以前的经验，从而避免⽤⼾进⾏⼤量重复交互。</p>
 <ul>
 <li>短期记忆：存储单次对话周期的上下文信息，属于临时信息存储机制。受限于模型的上下文窗口长度。</li>
 <li>长期记忆：可以横跨多个任务或时间周期，可存储并调用核心知识，非即时任务。 长期记忆，可以通过模型参数微调（固化知识）、知识图谱（结构化语义网络）或向量数据库 （相似性检索）方式实现。</li>
 </ul>
 <p><strong>3、工具使用（Tool Use）</strong>：调用外部工具（如API、数据库）扩展能力边界。</p>
-<p>**4、规划决策（Planning）：**通过任务分解、反思与自省框架实现复杂任务处理。例如，利用思维链 （Chain of Thought）将目标拆解为子任务，并通过反馈优化策略。</p>
-<p>**5、行动（Action）：**实际执行决策的模块，涵盖软件接口操作（如自动订票）和物理交互（如机器人 执行搬运）。比如：检索、推理、编程等</p>
+<p><strong>4、规划决策（Planning）</strong>：通过任务分解、反思与自省框架实现复杂任务处理。例如，利用思维链 （Chain of Thought）将目标拆解为子任务，并通过反馈优化策略。</p>
+<p><strong>5、行动（Action）</strong>：实际执行决策的模块，涵盖软件接口操作（如自动订票）和物理交互（如机器人 执行搬运）。比如：检索、推理、编程等</p>
 <h2 id="3-大模型应用开发框架——LangChain"><a href="#3-大模型应用开发框架——LangChain" class="headerlink" title="3.大模型应用开发框架——LangChain"></a>3.大模型应用开发框架——LangChain</h2><h3 id="3-1-介绍是LangChain"><a href="#3-1-介绍是LangChain" class="headerlink" title="3.1 介绍是LangChain"></a>3.1 介绍是LangChain</h3><p>LangChain是 2022年10月 ，由哈佛大学的 Harrison Chase （哈里森·蔡斯）发起研发的一个开源框架， 用于开发由大语言模型（LLMs）驱动的应用程序。 </p>
 <p>比如，搭建“智能体”（Agent）、问答系统（QA）、对话机器人、文档搜索系统、企业私有知识库等.</p>
 <p>截止到2025年7月26日，GitHub统计数据：</p>
@@ -515,7 +515,7 @@
 </tr>
 </tbody></table>
 <h1 id="5-总结与展望"><a href="#5-总结与展望" class="headerlink" title="5 总结与展望"></a>5 总结与展望</h1><p>本次属于一次技术交流，主要跟大家交流大模型应用开发的流程以及应用场景，目前大模型可以赋能在许多场景下。真正的潜力，在于我们将自身的业务理解与这些技术进行碰撞和结合。 目前在我们各个项目的实际工作中，都蕴藏着大量可以被AI优化的环节</p>
-<p>同时大模型对传统前后端开发的岗位冲击很大，使得代码实现变得越来越容易，**未来的开发者不再是纯粹的“码农”，而是要成为大模型的“指挥家”、AI应用的“架构师”、问题的“定义者”。**所以我们非常有必要掌握一些大模型应用开发的知识，提升自己的个人竞争力，或者直接all in大模型应用开发岗。</p>
+<p>同时大模型对传统前后端开发的岗位冲击很大，使得代码实现变得越来越容易，<strong>未来的开发者不再是纯粹的“码农”，而是要成为大模型的“指挥家”、AI应用的“架构师”、问题的“定义者”</strong>。所以我们非常有必要掌握一些大模型应用开发的知识，提升自己的个人竞争力，或者直接all in大模型应用开发岗。</p>
 
       
 
@@ -750,11 +750,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
