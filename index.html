@@ -64,9 +64,9 @@
           </nav>
           <nav class="header-smart-menu">
             <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">
-              总文章数 8 |
+              总文章数 9 |
                 总字数 <span class="post-count">
-                  12.6k
+                  13.4k
                 </span>
             </a>
           </nav>
@@ -163,6 +163,87 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-精度问题导致模型训练过程中loss变为nan"
+  class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/12/14/%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E4%B8%ADloss%E5%8F%98%E4%B8%BAnan/">JPEG 压缩预处理引发的混合精度训练 Loss Nan 问题排查</a>
+    </h1>
+  
+
+          
+            <a href="/2025/12/14/%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E4%B8%ADloss%E5%8F%98%E4%B8%BAnan/" class="archive-article-date">
+  	<time datetime="2025-12-14T12:02:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-12-14</time>
+</a>
+              
+      </header>
+      <div class="article-entry post-count">
+        字数：790字 | 预计阅读时长：2分钟
+      </div>
+      
+        <div class="article-entry" itemprop="articleBody">
+          
+            <p>最近在训练一个图像篡改检测网络时，为了提升模型的鲁棒性，我对数据集进行了<strong>随机 JPEG 压缩</strong>作为预处理手段。本以为这只是一个常规的数据增强操作，没想到却引发了一场艰难的 Debug 之旅——模型训练过程中 Loss 突然变成了 <code>NaN</code>。</p>
+<p>经过一系列常规排查无果后，最终锁定了<strong>混合精度训练（与数据分布</strong>之间的问题。在此记录下排查思路和解决方法。</p>
+<p><strong>训练设置</strong>：我使用MMSeg框架的自动混合精度<code>AmpOptimWrapper</code>。</p>
+              
+                  
+
+                        
+        </div>
+        <div class="article-info article-info-index">
+          
+              
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+                
+
+                  
+                    <p class="article-more-link">
+                      <a class="article-more-a" href="/2025/12/14/%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E4%B8%ADloss%E5%8F%98%E4%B8%BAnan/">
+                        展开全文 >>
+                      </a>
+                    </p>
+                    
+
+                      
+                            <div class="clearfix"></div>
+        </div>
+  </div>
+</article>
+
+      <aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+        
   
     <article id="post-浅谈大模型应用开发"
   class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -913,19 +994,23 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSE</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">大模型应用开发</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">大模型应用开发</a>
               </li>
             
             <div class="clearfix"></div>
