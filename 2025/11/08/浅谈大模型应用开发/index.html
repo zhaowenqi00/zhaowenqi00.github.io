@@ -192,7 +192,7 @@
 <p>在大语言模型（LLM）如 ChatGPT、Claude、DeepSeek 等快速发展的今天，开发者不仅希望能“使用”这些模型，还希望能将它们灵活集成到自己的应用中，实现更强大的对话能力、检索增强生成 （RAG）、工具调用（Tool Calling）、多轮推理等功能。</p>
 <span id="more"></span>
 
-<p><img src="1.PNG#pic_center"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/1.PNG#pic_center"></p>
 <h2 id="2-大模型应用开发"><a href="#2-大模型应用开发" class="headerlink" title="2.大模型应用开发"></a>2.大模型应用开发</h2><p>大模型应用技术特点：门槛低，天花板高。</p>
 <h3 id="2-1-基于RAG架构的开发"><a href="#2-1-基于RAG架构的开发" class="headerlink" title="2.1 基于RAG架构的开发"></a><strong>2.1 基于RAG架构的开发</strong></h3><p><strong>背景：</strong> </p>
 <ul>
@@ -206,10 +206,10 @@
 <p>Retrieval-Augmented Generation（检索增强生成）</p>
 <p>第一阶段：知识库构建（1 -&gt; 6）</p>
 <p>第二阶段：问答（7 -&gt; 15）</p>
-<p><img src="2.PNG#pic_center" alt="2"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/2.PNG#pic_center" alt="2"></p>
 <p><strong>检索-增强-生成过程：检索可以理解为第10步，增强理解为第12步（这里的提示词包含检索到的数据），生成理解为第15步。</strong></p>
 <p>类似的细节图：</p>
-<p><img src="3.PNG" alt="3"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/3.PNG" alt="3"></p>
 <p><strong>RAG的优缺点</strong></p>
 <p>RAG的优点 </p>
 <ol>
@@ -223,7 +223,7 @@
 <li>引用的外部知识数据会消耗大量的模型Token资源。</li>
 </ol>
 <h3 id="2-2-基于Agent架构的开发"><a href="#2-2-基于Agent架构的开发" class="headerlink" title="2.2 基于Agent架构的开发"></a><strong>2.2 基于Agent架构的开发</strong></h3><p>充分利用 LLM 的推理决策能力，通过增加<strong>规划、记忆和工具</strong>调用的能力，构造一个能够独立思考、逐步完成给定目标的智能体。</p>
-<p><img src="4.PNG" alt="4"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/4.PNG" alt="4"></p>
 <p>​				<strong>Agent &#x3D;</strong> <strong>LLM</strong> <strong>+ Memory + Tools + Planning +  Action</strong></p>
 <p><strong>智能体核心要素被细化为以下模块：</strong></p>
 <p><strong>1、大模型（LLM）作为“大脑”</strong>：提供推理、规划和知识理解能力，是AI Agent的决策中枢。</p>
@@ -238,7 +238,7 @@
 <h2 id="3-大模型应用开发框架——LangChain"><a href="#3-大模型应用开发框架——LangChain" class="headerlink" title="3.大模型应用开发框架——LangChain"></a>3.大模型应用开发框架——LangChain</h2><h3 id="3-1-介绍是LangChain"><a href="#3-1-介绍是LangChain" class="headerlink" title="3.1 介绍是LangChain"></a>3.1 介绍是LangChain</h3><p>LangChain是 2022年10月 ，由哈佛大学的 Harrison Chase （哈里森·蔡斯）发起研发的一个开源框架， 用于开发由大语言模型（LLMs）驱动的应用程序。 </p>
 <p>比如，搭建“智能体”（Agent）、问答系统（QA）、对话机器人、文档搜索系统、企业私有知识库等.</p>
 <p>截止到2025年7月26日，GitHub统计数据：</p>
-<p><img src="5.PNG" alt="5"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/5.PNG" alt="5"></p>
 <ul>
 <li><code>LangChain</code> ：这些工具里出现最早、最成熟的，适合复杂任务分解和单智能体应用 。</li>
 <li><code>LlamaIndex </code>：专注于高效的索引和检索，适合 RAG 场景。</li>
@@ -253,7 +253,7 @@
 <p>非对话模型（LLMs、Text Model）</p>
 <p>对话模型（Chat Models）</p>
 <p>嵌入模型（Embedding Models）</p>
-<p><img src="6.PNG" alt="6"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/6.PNG" alt="6"></p>
 <p><strong>Prompt Template提示词模板</strong></p>
 <p>有几种不同类型的提示模板：</p>
 <ul>
@@ -287,7 +287,7 @@
 <p>实现这个记忆功能，就需要<strong>额外的模块</strong>去保存我们和模型对话的上下文信息，然后在下一次请求时，把所有的历史信息都输入给模型，让模型输出最终结果。 而在LangChain中，提供这个功能的模块就称为<strong>Memory(记忆)</strong> ，用于存储用户和模型交互的历史信息。</p>
 <p><strong>Memory的设计理念</strong></p>
 <p>Memory，是LangChain中用于多轮对话中保存和管理上下文信息（比如文本、图像、音频等）的组 件。它让应用能够记住用户之前说了什么，从而实现对话的 感知的链式对话系统提供了基础。</p>
-<p><img src="7.PNG" alt="7"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/7.PNG" alt="7"></p>
 <ol>
 <li>输入问题：({“question”: …}) </li>
 <li>读取历史消息：从Memory中READ历史消息（{“past_messages”: […]}） </li>
@@ -302,7 +302,7 @@
 <p>层次3(稍微复杂一点)：返回过去k条消息的简洁摘要 </p>
 <p>层次4(更复杂)：从存储的消息中提取实体，并且仅返回有关当前运行中引用的实体的信息</p>
 <p>针对上述情况，LangChain构建了一些可以直接使用的 <code>Memory</code>工具，用于存储聊天消息的一系列集成。</p>
-<p><img src="8.PNG" alt="8"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/8.PNG" alt="8"></p>
 <h4 id="3-2-4-Tools"><a href="#3-2-4-Tools" class="headerlink" title="3.2.4 Tools"></a>3.2.4 Tools</h4><p>Tools 用于扩展大语言模型（LLM）的能力，使其能够与外部系统、API 或自定义函数交互，从而完成仅靠文本生成无法实现的任务（如搜索、计算、数据库查询等）。</p>
 <p><strong>Tool 的要素：</strong></p>
 <ul>
@@ -312,7 +312,7 @@
 <li>要调用的函数</li>
 <li>return_direct ：是否应将工具结果直接返回给用户（仅对Agent相关）</li>
 </ul>
-<p><img src="9.PNG" alt="9"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/9.PNG" alt="9"></p>
 <p><strong>实操步骤：</strong> </p>
 <p>步骤1：将name、description 和 JSON模式作为上下文提供给LLM </p>
 <p>步骤2：LLM会根据提示词推断出需要调用哪些工具，并提供具体的调用参数信息 </p>
@@ -331,7 +331,7 @@
 <h4 id="3-2-5-Agents"><a href="#3-2-5-Agents" class="headerlink" title="3.2.5 Agents"></a>3.2.5 Agents</h4><p>通用人工智能（AGI）将是AI的终极形态，几乎已成为业界共识。同样，构建智能体（Agent）则是AI工程应用当下的“终极形态”。</p>
 <p><strong>（1）什么是Agent?</strong></p>
 <p>Agent（智能体） 是一个通过动态协调大语言模型（LLM）和工具（Tools） 来完成复杂任务的智能系统。它让LLM充当”决策大脑”，根据用户输入自主选择和执行工具（如搜索、计算、数据库查询等）， 最终生成精准的响应。</p>
-<p><img src="10.PNG" alt="10"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/10.PNG" alt="10"></p>
 <p><strong>（2）Agent、AgentExecutor的创建:</strong></p>
 <table>
 <thead>
@@ -404,7 +404,7 @@
 <li>RAG的解决方案：当应用需求集中在利用大模型去 回答特定私有领域的知识，且知识库足够大，那么除了 型外， RAG 就是非常有效的一种缓解大模型推理的“幻觉”问题的解决方案。Retrieval对这一流程提供了解决方案。</li>
 </ul>
 <p><strong>（2）Retrieval流程</strong></p>
-<p><img src="11.PNG" alt="11"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/11.PNG" alt="11"></p>
 <p><strong>环节1：Source（数据源）</strong></p>
 <p>指的是RAG架构中所外挂的知识库。这里有三点说明： </p>
 <ol>
@@ -434,7 +434,7 @@
 <p><strong>环节6：Retrieve（检索）</strong></p>
 <h1 id="2-相关技术体系"><a href="#2-相关技术体系" class="headerlink" title="2 相关技术体系"></a>2 相关技术体系</h1><h2 id="低代码平台"><a href="#低代码平台" class="headerlink" title="低代码平台"></a>低代码平台</h2><p>Dify：</p>
 <p>Dify是一个开源的大语言模型（LLM）应用开发平台，旨在简化和加速生成式AI应用的创建和部署。该平台结合了后端即服务（Backend as Service, BaaS）和LLMOps的理念，为开发者提供了一个用户友好的界面和一系列强大的工具 ，使他们能够快速搭建生产级的AI应用。</p>
-<p><img src="12.PNG" alt="12"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/12.PNG" alt="12"></p>
 <table>
 <thead>
 <tr>
@@ -500,8 +500,8 @@
 <p>向量搜索：根据输入向量，找到最相似的向量</p>
 <p><strong>场景4：Fine-tuning(精调&#x2F;微调)</strong>  </p>
 <p>举例：努力学习考试内容，长期记住，活学活用。</p>
-<p><img src="13.PNG" alt="13"></p>
-<h3 id="铁塔项目利用大模型进行数据预处理："><a href="#铁塔项目利用大模型进行数据预处理：" class="headerlink" title="铁塔项目利用大模型进行数据预处理："></a>铁塔项目利用大模型进行数据预处理：</h3><p><img src="14.PNG" alt="14"></p>
+<p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/13.PNG" alt="13"></p>
+<h3 id="铁塔项目利用大模型进行数据预处理："><a href="#铁塔项目利用大模型进行数据预处理：" class="headerlink" title="铁塔项目利用大模型进行数据预处理："></a>铁塔项目利用大模型进行数据预处理：</h3><p><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/14.PNG" alt="14"></p>
 <table>
 <thead>
 <tr>
@@ -510,8 +510,8 @@
 </tr>
 </thead>
 <tbody><tr>
-<td align="center"><img src="15.PNG" alt="15"></td>
-<td align="center"><img src="16.PNG" alt="16"></td>
+<td align="center"><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/15.PNG" alt="15"></td>
+<td align="center"><img src="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/16.PNG" alt="16"></td>
 </tr>
 </tbody></table>
 <h1 id="5-总结与展望"><a href="#5-总结与展望" class="headerlink" title="5 总结与展望"></a>5 总结与展望</h1><p>本次属于一次技术交流，主要跟大家交流大模型应用开发的流程以及应用场景，目前大模型可以赋能在许多场景下。真正的潜力，在于我们将自身的业务理解与这些技术进行碰撞和结合。 目前在我们各个项目的实际工作中，都蕴藏着大量可以被AI优化的环节</p>
@@ -750,7 +750,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -758,11 +758,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
