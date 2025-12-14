@@ -6,22 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Server-Sent Events (SSE) 实战：AI对话系统 | 赵文琦的博客</title>
+  <title>Server-Sent Events (SSE) 实现流式输出 | 赵文琦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.为什么需要“流式传输”？在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。 但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。">
+  <meta name="description" content="1.为什么需要“流式传输”？在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。 但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。如果让用户盯着空白屏幕等 10 秒，体验会非常糟糕。于是，SSE (Server-Sent Events)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Server-Sent Events (SSE) 实战：AI对话系统">
+<meta property="og:title" content="Server-Sent Events (SSE) 实现流式输出">
 <meta property="og:url" content="http://example.com/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/index.html">
 <meta property="og:site_name" content="赵文琦的博客">
-<meta property="og:description" content="1.为什么需要“流式传输”？在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。 但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。">
+<meta property="og:description" content="1.为什么需要“流式传输”？在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。 但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。如果让用户盯着空白屏幕等 10 秒，体验会非常糟糕。于是，SSE (Server-Sent Events)">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/image-20251214184914878.png">
 <meta property="article:published_time" content="2025-01-14T10:29:43.000Z">
-<meta property="article:modified_time" content="2025-12-14T10:55:38.424Z">
+<meta property="article:modified_time" content="2025-12-14T11:01:25.168Z">
 <meta property="article:author" content="赵文琦">
 <meta property="article:tag" content="SSE">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/image-20251214184914878.png">
   
     <link rel="alternative" href="/atom.xml" title="赵文琦的博客" type="application/atom+xml">
   
@@ -177,7 +175,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Server-Sent Events (SSE) 实战：AI对话系统
+      Server-Sent Events (SSE) 实现流式输出
     </h1>
   
 
@@ -188,23 +186,20 @@
               
       </header>
       <div class="article-entry post-count">
-        字数：889字 | 预计阅读时长：3分钟
+        字数：886字 | 预计阅读时长：3分钟
       </div>
       
         <div class="article-entry" itemprop="articleBody">
           
                     <h4 id="1-为什么需要“流式传输”？"><a href="#1-为什么需要“流式传输”？" class="headerlink" title="1.为什么需要“流式传输”？"></a>1.为什么需要“流式传输”？</h4><p>在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。</p>
-<p>但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。<span id="more"></span>如果让用户盯着空白屏幕等 10 秒，体验会非常糟糕。于是，<strong>SSE (Server-Sent Events)</strong> 再次回到了聚光灯下。它允许服务器一边生成内容，一边通过长连接把数据“推”给前端，也就是我们看到的“打字机效果”。</p>
+<p>但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。如果让用户盯着空白屏幕等 10 秒，体验会非常糟糕。于是，<strong>SSE (Server-Sent Events)</strong> <span id="more"></span>再次回到了聚光灯下。它允许服务器一边生成内容，一边通过长连接把数据“推”给前端，也就是我们看到的“打字机效果”。</p>
 <h4 id="2-什么是-SSE？"><a href="#2-什么是-SSE？" class="headerlink" title="2.什么是 SSE？"></a>2.什么是 SSE？</h4><p>SSE（Server-Sent Events）是一种基于 HTTP 的单向通信机制。</p>
 <ul>
 <li><strong>HTTP 标准</strong>：它不需要像 WebSocket 那样复杂的握手协议，它本质上就是一个长连接的 HTTP 请求。</li>
 <li><strong>单向通信</strong>：服务端 -&gt; 客户端。这非常适合 AI 生成内容的场景（用户问一次，AI 持续吐字）。</li>
 <li><strong>简单易用</strong>：浏览器原生支持 <code>EventSource</code> API，后端实现也只是多了一个 <code>yield</code>。</li>
 </ul>
-<h4 id="3-案例展示"><a href="#3-案例展示" class="headerlink" title="3.案例展示"></a>3.案例展示</h4><p>这里展示一个简易的AI对话系统并带有记忆功能，主要是为了展示SSE流式输出部分代码。</p>
-<p>效果图：</p>
-<img src="/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/image-20251214184914878.png" alt="image-20251214184914878" style="zoom: 33%;">
-
+<h4 id="3-代码展示"><a href="#3-代码展示" class="headerlink" title="3.代码展示"></a>3.代码展示</h4><p>之前做的一个AI知识库项目需要用到SSE实现流式输出，这里展示一下SSE流式输出部分代码。</p>
 <h5 id="后端实现：FastAPI-sse-starlette"><a href="#后端实现：FastAPI-sse-starlette" class="headerlink" title="后端实现：FastAPI + sse_starlette"></a>后端实现：FastAPI + sse_starlette</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sse_starlette.sse <span class="keyword">import</span> EventSourceResponse</span><br><span class="line"><span class="keyword">from</span> langchain_core.messages <span class="keyword">import</span> HumanMessage, AIMessage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义生成器函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stream_generator</span>(<span class="params">session_id: <span class="built_in">str</span>, text: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="comment"># 1. 获取上下文（实现记忆功能）</span></span><br><span class="line">    history = get_history(session_id)</span><br><span class="line">    current_messages = history + [HumanMessage(content=text)]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 调用大模型流式接口</span></span><br><span class="line">    <span class="keyword">for</span> chunk <span class="keyword">in</span> model.stream(current_messages):</span><br><span class="line">        content = chunk.content</span><br><span class="line">        <span class="keyword">if</span> content:</span><br><span class="line">            <span class="comment"># 3. 按照 SSE 格式推送数据</span></span><br><span class="line">            <span class="comment"># 格式通常是: data: &lt;内容&gt;\n\n</span></span><br><span class="line">            <span class="keyword">yield</span> &#123;</span><br><span class="line">                <span class="string">&quot;event&quot;</span>: <span class="string">&quot;message&quot;</span>,</span><br><span class="line">                <span class="string">&quot;data&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">    <span class="comment"># 4. 结束标记</span></span><br><span class="line">    <span class="keyword">yield</span> &#123;<span class="string">&quot;data&quot;</span>: <span class="string">&quot;[[END]]&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># API 接口</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/chat_stream&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">chat_stream</span>(<span class="params">text: <span class="built_in">str</span>, session_id: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="keyword">return</span> EventSourceResponse(stream_generator(session_id, text))</span><br></pre></td></tr></table></figure>
 
 <p><strong>关键点解析：</strong></p>
@@ -361,7 +356,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93%E2%80%9D%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1.为什么需要“流式传输”？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF-SSE%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">2.什么是 SSE？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%A1%88%E4%BE%8B%E5%B1%95%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">3.案例展示</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E5%AE%9E%E7%8E%B0%EF%BC%9AFastAPI-sse-starlette"><span class="toc-number">3.1.</span> <span class="toc-text">后端实现：FastAPI + sse_starlette</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%8E%9F%E7%94%9F-EventSource-%E6%B0%94%E6%B3%A1-UI"><span class="toc-number">3.2.</span> <span class="toc-text">前端实现：原生 EventSource + 气泡 UI</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.3.</span> <span class="toc-text">遇到的坑与解决方案</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E6%B5%81%E5%BC%8F%E4%BC%A0%E8%BE%93%E2%80%9D%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">1.为什么需要“流式传输”？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BB%80%E4%B9%88%E6%98%AF-SSE%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">2.什么是 SSE？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BB%A3%E7%A0%81%E5%B1%95%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">3.代码展示</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF%E5%AE%9E%E7%8E%B0%EF%BC%9AFastAPI-sse-starlette"><span class="toc-number">3.1.</span> <span class="toc-text">后端实现：FastAPI + sse_starlette</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%E5%AE%9E%E7%8E%B0%EF%BC%9A%E5%8E%9F%E7%94%9F-EventSource-%E6%B0%94%E6%B3%A1-UI"><span class="toc-number">3.2.</span> <span class="toc-text">前端实现：原生 EventSource + 气泡 UI</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">3.3.</span> <span class="toc-text">遇到的坑与解决方案</span></a></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -474,6 +469,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
@@ -482,15 +481,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">大模型应用开发</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
