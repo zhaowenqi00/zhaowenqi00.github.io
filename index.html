@@ -64,9 +64,9 @@
           </nav>
           <nav class="header-smart-menu">
             <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">
-              总文章数 7 |
+              总文章数 8 |
                 总字数 <span class="post-count">
-                  11.7k
+                  12.6k
                 </span>
             </a>
           </nav>
@@ -377,6 +377,129 @@
                   
                     <p class="article-more-link">
                       <a class="article-more-a" href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">
+                        展开全文 >>
+                      </a>
+                    </p>
+                    
+
+                      
+                            <div class="clearfix"></div>
+        </div>
+  </div>
+</article>
+
+      <aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+        
+  
+    <article id="post-Server-Sent-Events-SSE-实战：AI对话系统"
+  class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/">Server-Sent Events (SSE) 实战：AI对话系统</a>
+    </h1>
+  
+
+          
+            <a href="/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/" class="archive-article-date">
+  	<time datetime="2025-01-14T10:29:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-01-14</time>
+</a>
+              
+      </header>
+      <div class="article-entry post-count">
+        字数：889字 | 预计阅读时长：3分钟
+      </div>
+      
+        <div class="article-entry" itemprop="articleBody">
+          
+                    <h4 id="1-为什么需要“流式传输”？"><a href="#1-为什么需要“流式传输”？" class="headerlink" title="1.为什么需要“流式传输”？"></a>1.为什么需要“流式传输”？</h4><p>在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。</p>
+<p>但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。如果让用户盯着空白屏幕等 10 秒，体验会非常糟糕。于是，<strong>SSE (Server-Sent Events)</strong> 再次回到了聚光灯下。它允许服务器一边生成内容，一边通过长连接把数据“推”给前端，也就是我们看到的“打字机效果”。</p>
+<h4 id="2-什么是-SSE？"><a href="#2-什么是-SSE？" class="headerlink" title="2.什么是 SSE？"></a>2.什么是 SSE？</h4><p>SSE（Server-Sent Events）是一种基于 HTTP 的单向通信机制。</p>
+<ul>
+<li><strong>HTTP 标准</strong>：它不需要像 WebSocket 那样复杂的握手协议，它本质上就是一个长连接的 HTTP 请求。</li>
+<li><strong>单向通信</strong>：服务端 -&gt; 客户端。这非常适合 AI 生成内容的场景（用户问一次，AI 持续吐字）。</li>
+<li><strong>简单易用</strong>：浏览器原生支持 <code>EventSource</code> API，后端实现也只是多了一个 <code>yield</code>。</li>
+</ul>
+<h4 id="3-案例展示"><a href="#3-案例展示" class="headerlink" title="3.案例展示"></a>3.案例展示</h4><p>这里展示一个简易的AI对话系统并带有记忆功能，主要是为了展示SSE流式输出部分代码。</p>
+<p>效果图：</p>
+<img src="/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/image-20251214184914878.png" alt="image-20251214184914878" style="zoom: 33%;">
+
+<h5 id="后端实现：FastAPI-sse-starlette"><a href="#后端实现：FastAPI-sse-starlette" class="headerlink" title="后端实现：FastAPI + sse_starlette"></a>后端实现：FastAPI + sse_starlette</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sse_starlette.sse <span class="keyword">import</span> EventSourceResponse</span><br><span class="line"><span class="keyword">from</span> langchain_core.messages <span class="keyword">import</span> HumanMessage, AIMessage</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义生成器函数</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">stream_generator</span>(<span class="params">session_id: <span class="built_in">str</span>, text: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="comment"># 1. 获取上下文（实现记忆功能）</span></span><br><span class="line">    history = get_history(session_id)</span><br><span class="line">    current_messages = history + [HumanMessage(content=text)]</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2. 调用大模型流式接口</span></span><br><span class="line">    <span class="keyword">for</span> chunk <span class="keyword">in</span> model.stream(current_messages):</span><br><span class="line">        content = chunk.content</span><br><span class="line">        <span class="keyword">if</span> content:</span><br><span class="line">            <span class="comment"># 3. 按照 SSE 格式推送数据</span></span><br><span class="line">            <span class="comment"># 格式通常是: data: &lt;内容&gt;\n\n</span></span><br><span class="line">            <span class="keyword">yield</span> &#123;</span><br><span class="line">                <span class="string">&quot;event&quot;</span>: <span class="string">&quot;message&quot;</span>,</span><br><span class="line">                <span class="string">&quot;data&quot;</span>: content</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">    <span class="comment"># 4. 结束标记</span></span><br><span class="line">    <span class="keyword">yield</span> &#123;<span class="string">&quot;data&quot;</span>: <span class="string">&quot;[[END]]&quot;</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># API 接口</span></span><br><span class="line"><span class="meta">@app.get(<span class="params"><span class="string">&quot;/chat_stream&quot;</span></span>)</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">def</span> <span class="title function_">chat_stream</span>(<span class="params">text: <span class="built_in">str</span>, session_id: <span class="built_in">str</span></span>):</span><br><span class="line">    <span class="keyword">return</span> EventSourceResponse(stream_generator(session_id, text))</span><br></pre></td></tr></table></figure>
+
+<p><strong>关键点解析：</strong></p>
+<ul>
+<li><strong><code>yield</code></strong>: 它的作用是“产出”数据但不结束函数，函数会暂停在这里，直到下一次循环。这就实现了“生成一点，发送一点”。</li>
+<li><strong><code>EventSourceResponse</code></strong>: 自动处理 HTTP Header（如 <code>Content-Type: text/event-stream</code>），告诉浏览器这是一个流。</li>
+</ul>
+<h5 id="前端实现：原生-EventSource-气泡-UI"><a href="#前端实现：原生-EventSource-气泡-UI" class="headerlink" title="前端实现：原生 EventSource + 气泡 UI"></a>前端实现：原生 EventSource + 气泡 UI</h5><p>前端部分，使用 <code>EventSource</code>。为了支持 Header 传参（如 Token），推荐使用 <code>event-source-polyfill</code>。</p>
+<ol>
+<li>建立连接</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 引入 polyfill</span></span><br><span class="line"><span class="comment">// &lt;script src=&quot;eventsource.min.js&quot;&gt;&lt;/script&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> url = <span class="keyword">new</span> <span class="title function_">URL</span>(<span class="string">&#x27;http://127.0.0.1:9000/chat_stream&#x27;</span>);</span><br><span class="line">url.<span class="property">searchParams</span>.<span class="title function_">set</span>(<span class="string">&#x27;text&#x27;</span>, <span class="string">&quot;你好&quot;</span>);</span><br><span class="line">url.<span class="property">searchParams</span>.<span class="title function_">set</span>(<span class="string">&#x27;session_id&#x27;</span>, <span class="string">&quot;user_123&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 建立连接</span></span><br><span class="line"><span class="keyword">const</span> es = <span class="keyword">new</span> <span class="title class_">EventSourcePolyfill</span>(url, &#123;</span><br><span class="line">    <span class="attr">headers</span>: &#123; <span class="title class_">Authorization</span>: <span class="string">&#x27;Bearer my-token&#x27;</span> &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>接收数据与渲染</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> aiMessageDiv = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;div&#x27;</span>); <span class="comment">// 创建气泡</span></span><br><span class="line"><span class="keyword">let</span> currentText = <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">es.<span class="property">onmessage</span> = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 1. 判断是否结束</span></span><br><span class="line">    <span class="keyword">if</span> (e.<span class="property">data</span> === <span class="string">&#x27;[[END]]&#x27;</span>) &#123;</span><br><span class="line">        es.<span class="title function_">close</span>(); <span class="comment">// 关闭连接</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 拼接数据（增量渲染）</span></span><br><span class="line">    currentText += e.<span class="property">data</span>;</span><br><span class="line">    aiMessageDiv.<span class="property">innerText</span> = currentText; </span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 自动滚动到底部</span></span><br><span class="line">    <span class="title function_">scrollToBottom</span>();</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">es.<span class="property">onerror</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;连接异常&quot;</span>);</span><br><span class="line">    es.<span class="title function_">close</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h5 id="遇到的坑与解决方案"><a href="#遇到的坑与解决方案" class="headerlink" title="遇到的坑与解决方案"></a>遇到的坑与解决方案</h5><p>我在真实项目开发过程中遇到了以下问题：</p>
+<ol>
+<li><strong>CORS 跨域问题</strong>：<ul>
+<li>SSE 对跨域非常敏感。需要在 FastAPI 中配置 <code>CORSMiddleware</code>，允许前端域名访问。</li>
+</ul>
+</li>
+<li><strong>连接断开重连</strong>：<ul>
+<li>原生 <code>EventSource</code> 会自动重连，这在聊天场景有时不需要（比如回答已经结束了）。一定要在后端发送明确的结束标记（如 <code>[[END]]</code>），前端收到后手动 <code>.close()</code>。</li>
+</ul>
+</li>
+<li><strong>Nginx 缓存缓冲</strong>：<ul>
+<li>如果你部署在 Nginx 后面，Nginx 默认会缓存一部分响应再发送，这会导致流式效果失效（变成一卡一卡的）。需要关闭 Nginx 的 <code>proxy_buffering</code>。</li>
+</ul>
+</li>
+</ol>
+
+                      
+
+                        
+        </div>
+        <div class="article-info article-info-index">
+          
+              
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">SSE</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+                
+
+                  
+                    <p class="article-more-link">
+                      <a class="article-more-a" href="/2025/01/14/Server-Sent-Events-SSE-%E5%AE%9E%E6%88%98%EF%BC%9AAI%E5%AF%B9%E8%AF%9D%E7%B3%BB%E7%BB%9F/">
                         展开全文 >>
                       </a>
                     </p>
@@ -825,7 +948,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">SSE</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -834,10 +965,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">conda</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
