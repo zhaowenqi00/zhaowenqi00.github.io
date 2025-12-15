@@ -8,15 +8,15 @@
   <link rel="dns-prefetch" href="http://example.com">
   <title>JPEG 压缩预处理引发的混合精度训练 Loss Nan 问题排查 | 赵文琦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="最近在训练一个图像篡改检测网络时，为了提升模型的鲁棒性，我对数据集进行了随机 JPEG 压缩作为预处理手段。本以为这只是一个常规的数据增强操作，没想到却引发了一场艰难的 Debug 之旅——模型训练过程中 Loss 突然变成了 NaN。 经过一系列常规排查无果后，最终锁定了混合精度训练（与数据分布之间的问题。在此记录下排查思路和解决方法。 训练设置：我使用MMSeg框架的自动混合精度AmpOpti">
+  <meta name="description" content="最近在训练一个图像篡改检测网络时，为了提升模型的鲁棒性，我对数据集进行了随机 JPEG 压缩作为预处理手段。本以为这只是一个常规的数据增强操作，没想到却引发了一场艰难的 Debug 之旅——模型训练过程中 Loss 突然变成了 NaN。 经过一系列常规排查无果后，最终锁定了混合精度训练与数据分布之间的问题。在此记录下排查思路和解决方法。 训练设置：我使用MMSeg框架的自动混合精度AmpOptim">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JPEG 压缩预处理引发的混合精度训练 Loss Nan 问题排查">
 <meta property="og:url" content="http://example.com/2025/05/23/%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E4%B8%ADloss%E5%8F%98%E4%B8%BAnan/index.html">
 <meta property="og:site_name" content="赵文琦的博客">
-<meta property="og:description" content="最近在训练一个图像篡改检测网络时，为了提升模型的鲁棒性，我对数据集进行了随机 JPEG 压缩作为预处理手段。本以为这只是一个常规的数据增强操作，没想到却引发了一场艰难的 Debug 之旅——模型训练过程中 Loss 突然变成了 NaN。 经过一系列常规排查无果后，最终锁定了混合精度训练（与数据分布之间的问题。在此记录下排查思路和解决方法。 训练设置：我使用MMSeg框架的自动混合精度AmpOpti">
+<meta property="og:description" content="最近在训练一个图像篡改检测网络时，为了提升模型的鲁棒性，我对数据集进行了随机 JPEG 压缩作为预处理手段。本以为这只是一个常规的数据增强操作，没想到却引发了一场艰难的 Debug 之旅——模型训练过程中 Loss 突然变成了 NaN。 经过一系列常规排查无果后，最终锁定了混合精度训练与数据分布之间的问题。在此记录下排查思路和解决方法。 训练设置：我使用MMSeg框架的自动混合精度AmpOptim">
 <meta property="og:locale">
 <meta property="article:published_time" content="2025-05-23T12:02:55.000Z">
-<meta property="article:modified_time" content="2025-12-14T12:35:02.179Z">
+<meta property="article:modified_time" content="2025-12-15T04:31:52.092Z">
 <meta property="article:author" content="赵文琦">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary">
@@ -69,9 +69,9 @@
           </nav>
           <nav class="header-smart-menu">
             <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">
-              总文章数 9 |
+              总文章数 10 |
                 总字数 <span class="post-count">
-                  13.4k
+                  14.5k
                 </span>
             </a>
           </nav>
@@ -192,7 +192,7 @@
         <div class="article-entry" itemprop="articleBody">
           
                     <p>最近在训练一个图像篡改检测网络时，为了提升模型的鲁棒性，我对数据集进行了<strong>随机 JPEG 压缩</strong>作为预处理手段。本以为这只是一个常规的数据增强操作，没想到却引发了一场艰难的 Debug 之旅——模型训练过程中 Loss 突然变成了 <code>NaN</code>。</p>
-<p>经过一系列常规排查无果后，最终锁定了<strong>混合精度训练（与数据分布</strong>之间的问题。在此记录下排查思路和解决方法。</p>
+<p>经过一系列常规排查无果后，最终锁定了<strong>混合精度训练与数据分布</strong>之间的问题。在此记录下排查思路和解决方法。</p>
 <p><strong>训练设置</strong>：我使用MMSeg框架的自动混合精度<code>AmpOptimWrapper</code>。</p>
 <span id="more"></span>
 
@@ -444,6 +444,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSE</a>
               </li>
              
@@ -456,19 +460,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">大模型应用开发</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
