@@ -188,8 +188,7 @@
       
         <div class="article-entry" itemprop="articleBody">
           
-            <p>时间：2025.10.25</p>
-<p>分享人：赵文琦</p>
+            <p>时间：2025.10.25			分享人：赵文琦</p>
 <h2 id="1-理论体系背景"><a href="#1-理论体系背景" class="headerlink" title="1 理论体系背景"></a>1 理论体系背景</h2><h3 id="1-1-问题域"><a href="#1-1-问题域" class="headerlink" title="1.1 问题域"></a>1.1 问题域</h3><p><strong>问题：有了LLMs，为什么需要开发大模型应用？</strong></p>
 <p>在大语言模型（LLM）如 ChatGPT、Claude、DeepSeek 等快速发展的今天，开发者不仅希望能“使用”这些模型，还希望能将它们灵活集成到自己的应用中，实现更强大的对话能力、检索增强生成 （RAG）、工具调用（Tool Calling）、多轮推理等功能。</p>
               
@@ -351,7 +350,8 @@
       
         <div class="article-entry" itemprop="articleBody">
           
-            <h2 id="1-代理模式："><a href="#1-代理模式：" class="headerlink" title="1.代理模式："></a>1.代理模式：</h2><p>代理模式通过引入一个代理对象来控制对原对象的访问。代理对象在客户端和目标对象之间充当中介，负责将客户端的请求转发给目标对象，同时可以在转发请求前后进行额外的处理。</p>
+            <p><strong>1.代理模式：</strong></p>
+<p>代理模式通过引入一个代理对象来控制对原对象的访问。代理对象在客户端和目标对象之间充当中介，负责将客户端的请求转发给目标对象，同时可以在转发请求前后进行额外的处理。</p>
 <h5 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h5><ul>
 <li>当需要在访问一个对象时进行一些控制或额外处理时。</li>
 </ul>
@@ -417,7 +417,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">浅谈设计模式中的代理模式</a>
+      <a class="article-title" href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式中的代理模式</a>
     </h1>
   
 
@@ -428,12 +428,13 @@
               
       </header>
       <div class="article-entry post-count">
-        <span>字数：5.1k字 | 预计阅读时长：19分钟</span>
+        <span>字数：5.2k字 | 预计阅读时长：19分钟</span>
       </div>
       
         <div class="article-entry" itemprop="articleBody">
           
-            <h2 id="1-理论体系背景"><a href="#1-理论体系背景" class="headerlink" title="1 理论体系背景"></a>1 理论体系背景</h2><h3 id="1-1-问题域"><a href="#1-1-问题域" class="headerlink" title="1.1 问题域"></a>1.1 问题域</h3><p>​		某些场景下，我们在直接访问对象时可能遇到问题，例如，当需要访问的对象位于远程机器上时，或者某些对象的创建开销很大，又或者某些操作需要安全控制，直接访问这些对象可能会给使用者或系统结构带来诸多不便。<strong>代理模式能够处理远程访问、创建开销高、访问安全控制等问题，实现灵活的系统结构</strong>。</p>
+            <p>时间：2025.04.21			分享人：赵文琦</p>
+<h2 id="1-理论体系背景"><a href="#1-理论体系背景" class="headerlink" title="1 理论体系背景"></a>1 理论体系背景</h2><h3 id="1-1-问题域"><a href="#1-1-问题域" class="headerlink" title="1.1 问题域"></a>1.1 问题域</h3><p>​		某些场景下，我们在直接访问对象时可能遇到问题，例如，当需要访问的对象位于远程机器上时，或者某些对象的创建开销很大，又或者某些操作需要安全控制，直接访问这些对象可能会给使用者或系统结构带来诸多不便。<strong>代理模式能够处理远程访问、创建开销高、访问安全控制等问题，实现灵活的系统结构</strong>。</p>
               
                   
 
@@ -507,12 +508,13 @@
               
       </header>
       <div class="article-entry post-count">
-        <span>字数：886字 | 预计阅读时长：3分钟</span>
+        <span>字数：875字 | 预计阅读时长：3分钟</span>
       </div>
       
         <div class="article-entry" itemprop="articleBody">
           
-            <h4 id="1-为什么需要“流式传输”？"><a href="#1-为什么需要“流式传输”？" class="headerlink" title="1.为什么需要“流式传输”？"></a>1.为什么需要“流式传输”？</h4><p>在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。如果让用户盯着空白屏幕等 10 秒，体验会非常糟糕。于是，<strong>SSE (Server-Sent Events)</strong> 再次回到了聚光灯下。它允许服务器一边生成内容，一边通过长连接把数据“推”给前端，也就是我们看到的“打字机效果”。</p>
+            <p>在 ChatGPT 出现之前，大部分 Web 接口都是“请求-响应”模式：用户发一个请求，服务器处理完（可能需要几秒），然后一次性把结果扔回来。但在大模型时代，生成一段长文本可能需要 10 秒甚至更久。如果让用户盯着空白屏幕等 10 秒，体验会非常糟糕。于是，<strong>SSE (Server-Sent Events)</strong> 再次回到了聚光灯下。它允许服务器一边生成内容，一边通过长连接把数据“推”给前端，也就是我们看到的“打字机效果”。</p>
+<h4 id="1-什么是-SSE？"><a href="#1-什么是-SSE？" class="headerlink" title="1.什么是 SSE？"></a>1.什么是 SSE？</h4><p>SSE（Server-Sent Events）是一种基于 HTTP 的单向通信机制。</p>
               
                   
 
@@ -591,7 +593,8 @@
       
         <div class="article-entry" itemprop="articleBody">
           
-            <h5 id="方案：后端返回完整路由结构，前端动态组件映射"><a href="#方案：后端返回完整路由结构，前端动态组件映射" class="headerlink" title="方案：后端返回完整路由结构，前端动态组件映射"></a>方案：后端返回完整路由结构，前端动态组件映射</h5><h5 id="1-设计思路"><a href="#1-设计思路" class="headerlink" title="1. 设计思路"></a>1. 设计思路</h5><ol>
+            <p><strong>方案：后端返回完整路由结构，前端动态组件映射</strong></p>
+<h5 id="1-设计思路"><a href="#1-设计思路" class="headerlink" title="1. 设计思路"></a>1. 设计思路</h5><ol>
 <li><strong>初始状态：</strong> 路由表中只有“登录页”、“404”等基础静态路由页面。</li>
 <li><strong>登录：</strong> 用户登录，获取 Token。</li>
 <li><strong>获取权限：</strong> 前端拿着 Token 请求后端接口，后端返回该用户的<strong>菜单树（路由表）</strong>。</li></ol>
@@ -1076,11 +1079,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1088,7 +1087,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
