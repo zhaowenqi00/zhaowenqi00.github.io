@@ -66,7 +66,7 @@
             <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">
               总文章数 10 |
                 总字数 <span class="post-count">
-                  14.5k
+                  14.2k
                 </span>
             </a>
           </nav>
@@ -587,14 +587,15 @@
               
       </header>
       <div class="article-entry post-count">
-        字数：1.1k字 | 预计阅读时长：4分钟
+        字数：837字 | 预计阅读时长：4分钟
       </div>
       
         <div class="article-entry" itemprop="articleBody">
           
-            <h4 id="方案一：前端只在路由跳转时做权限判断。"><a href="#方案一：前端只在路由跳转时做权限判断。" class="headerlink" title="方案一：前端只在路由跳转时做权限判断。"></a>方案一：前端只在路由跳转时做权限判断。</h4><p>无需后端配合，在对需要权限区分的路由在跳转时候添加前置路由守卫router.beforeEach，进行当前权限判断，不满足权限的跳转到相应页面（自定义401、404页面等），但该方案不能实现真正的权限控制。</p>
-<h4 id="方案二：后端返回路由权限名，前端存储完整路由权限表，并动态生成路由。"><a href="#方案二：后端返回路由权限名，前端存储完整路由权限表，并动态生成路由。" class="headerlink" title="方案二：后端返回路由权限名，前端存储完整路由权限表，并动态生成路由。"></a>方案二：后端返回路由权限名，前端存储完整路由权限表，并动态生成路由。</h4><ol>
-<li>创建vue实例的时候将vue-router挂载，但这个时候vue-router挂载一些登录或者不用权限的公用的页面。</li></ol>
+            <h5 id="方案：后端返回完整路由结构，前端动态组件映射"><a href="#方案：后端返回完整路由结构，前端动态组件映射" class="headerlink" title="方案：后端返回完整路由结构，前端动态组件映射"></a>方案：后端返回完整路由结构，前端动态组件映射</h5><h5 id="1-设计思路"><a href="#1-设计思路" class="headerlink" title="1. 设计思路"></a>1. 设计思路</h5><ol>
+<li><strong>初始状态：</strong> 路由表中只有“登录页”、“404”等基础静态路由页面。</li>
+<li><strong>登录：</strong> 用户登录，获取 Token。</li>
+<li><strong>获取权限：</strong> 前端拿着 Token 请求后端接口，后端返回该用户的<strong>菜单树（路由表）</strong>。</li></ol>
               
                   
 
@@ -1067,15 +1068,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1083,7 +1076,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">大模型应用开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1092,10 +1097,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">前端</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
