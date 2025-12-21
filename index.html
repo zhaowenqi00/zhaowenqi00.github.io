@@ -189,13 +189,13 @@
         <div class="article-entry" itemprop="articleBody">
           
             <p>在前端开发中，经常会有大批量文件上传的需求。在面对“数千张高清图片批量上传”的需求时，传统的前端上传方案往往会出现各种各样的问题：</p>
-<ol>
+<ul>
 <li><strong>一次性全部上传</strong>：极易触发服务器 <code>413 Payload Too Large</code> 报错，且巨大的 HTTP 包体容易导致连接超时。</li>
 <li><strong>暴力循环</strong>：瞬间发起数千个 HTTP 请求，不仅会挤爆浏览器的并发限制，导致大量请求排队挂起，还可能瞬间压垮后端服务。</li>
-</ol>
+</ul>
 <p>针对这些问题，就需要前端分批上传，下面介绍一下一种<strong>支持分组、控制并发、且具备自动重试机制</strong>的大批量文件上传策略</p>
-<h4 id="1-核心设计思路"><a href="#1-核心设计思路" class="headerlink" title="1. 核心设计思路"></a>1. 核心设计思路</h4><ol>
-<li><strong>分批</strong>： 将 大批量文件切分成若干个小批次（比如每批 50-100 个），</li></ol>
+<h4 id="1-核心设计思路"><a href="#1-核心设计思路" class="headerlink" title="1. 核心设计思路"></a>1. 核心设计思路</h4><ul>
+<li><strong>分批</strong>： 将 大批量文件切分成若干个小批次（比如每批 50-100 个），</li></ul>
               
                   
 
@@ -913,15 +913,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">linux</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">linux</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -933,11 +933,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">前端</a>
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+                <a href="javascript:void(0)" class="js-tag color3">前端</a>
               </li>
              
               <li class="article-tag-list-item">
