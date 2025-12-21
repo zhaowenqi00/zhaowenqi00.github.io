@@ -64,9 +64,9 @@
           </nav>
           <nav class="header-smart-menu">
             <a href="javascript:void(0)" style="cursor: default; pointer-events: none;">
-              总文章数 12 |
+              总文章数 13 |
                 总字数 <span class="post-count">
-                  15.8k
+                  17.1k
                 </span>
             </a>
           </nav>
@@ -163,6 +163,92 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-大批量文件上传：前端分组并发与断点重试"
+  class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/">大批量文件上传：前端分组并发与断点重试</a>
+    </h1>
+  
+
+          
+            <a href="/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/" class="archive-article-date">
+  	<time datetime="2025-12-11T08:01:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-12-11</time>
+</a>
+              
+      </header>
+      <div class="article-entry post-count">
+        字数：1.3k字 | 预计阅读时长：5分钟
+      </div>
+      
+        <div class="article-entry" itemprop="articleBody">
+          
+            <p>在前端开发中，经常会有大批量文件上传的需求。在面对“数千张高清图片批量上传”的需求时，传统的前端上传方案往往会出现各种各样的问题：</p>
+<ol>
+<li><strong>一次性全部上传</strong>：极易触发服务器 <code>413 Payload Too Large</code> 报错，且巨大的 HTTP 包体容易导致连接超时。</li>
+<li><strong>暴力循环</strong>：瞬间发起数千个 HTTP 请求，不仅会挤爆浏览器的并发限制，导致大量请求排队挂起，还可能瞬间压垮后端服务。</li>
+</ol>
+<p>针对这些问题，就需要前端分批上传，下面介绍一下一种<strong>支持分组、控制并发、且具备自动重试机制</strong>的大批量文件上传策略</p>
+<h4 id="1-核心设计思路"><a href="#1-核心设计思路" class="headerlink" title="1. 核心设计思路"></a>1. 核心设计思路</h4><ol>
+<li><strong>分批</strong>： 将 大批量文件切分成若干个小批次（比如每批 50-100 个），</li></ol>
+              
+                  
+
+                        
+        </div>
+        <div class="article-info article-info-index">
+          
+              
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+                
+
+                  
+                    <p class="article-more-link">
+                      <a class="article-more-a" href="/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/">
+                        展开全文 >>
+                      </a>
+                    </p>
+                    
+
+                      
+                            <div class="clearfix"></div>
+        </div>
+  </div>
+</article>
+
+      <aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+        
   
     <article id="post-浅谈大模型应用开发"
   class="article article-type-post  article-index" itemscope itemprop="blogPost">
@@ -827,15 +913,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">conda</a>
+                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">SSE</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">vue</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -847,11 +929,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
+                <a href="javascript:void(0)" class="js-tag color1">conda</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -859,7 +937,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">大模型应用开发</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">深度学习</a>
               </li>
             
             <div class="clearfix"></div>

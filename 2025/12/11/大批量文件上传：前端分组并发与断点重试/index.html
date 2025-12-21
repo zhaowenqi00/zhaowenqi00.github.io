@@ -6,24 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>代理模式、外观模式和中介者模式区别 | 赵文琦的博客</title>
+  <title>大批量文件上传：前端分组并发与断点重试 | 赵文琦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.代理模式： 代理模式通过引入一个代理对象来控制对原对象的访问。代理对象在客户端和目标对象之间充当中介，负责将客户端的请求转发给目标对象，同时可以在转发请求前后进行额外的处理。 使用场景： 当需要在访问一个对象时进行一些控制或额外处理时。">
+  <meta name="description" content="在前端开发中，经常会有大批量文件上传的需求。在面对“数千张高清图片批量上传”的需求时，传统的前端上传方案往往会出现各种各样的问题：  一次性全部上传：极易触发服务器 413 Payload Too Large 报错，且巨大的 HTTP 包体容易导致连接超时。 暴力循环：瞬间发起数千个 HTTP 请求，不仅会挤爆浏览器的并发限制，导致大量请求排队挂起，还可能瞬间压垮后端服务。  针对这些问题，就需要">
 <meta property="og:type" content="article">
-<meta property="og:title" content="代理模式、外观模式和中介者模式区别">
-<meta property="og:url" content="http://example.com/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/index.html">
+<meta property="og:title" content="大批量文件上传：前端分组并发与断点重试">
+<meta property="og:url" content="http://example.com/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/index.html">
 <meta property="og:site_name" content="赵文琦的博客">
-<meta property="og:description" content="1.代理模式： 代理模式通过引入一个代理对象来控制对原对象的访问。代理对象在客户端和目标对象之间充当中介，负责将客户端的请求转发给目标对象，同时可以在转发请求前后进行额外的处理。 使用场景： 当需要在访问一个对象时进行一些控制或额外处理时。">
+<meta property="og:description" content="在前端开发中，经常会有大批量文件上传的需求。在面对“数千张高清图片批量上传”的需求时，传统的前端上传方案往往会出现各种各样的问题：  一次性全部上传：极易触发服务器 413 Payload Too Large 报错，且巨大的 HTTP 包体容易导致连接超时。 暴力循环：瞬间发起数千个 HTTP 请求，不仅会挤爆浏览器的并发限制，导致大量请求排队挂起，还可能瞬间压垮后端服务。  针对这些问题，就需要">
 <meta property="og:locale">
-<meta property="og:image" content="http://example.com/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/1.PNG#pic_center">
-<meta property="og:image" content="http://example.com/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/2.PNG#pic_center">
-<meta property="og:image" content="http://example.com/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/3.PNG#pic_center">
-<meta property="article:published_time" content="2025-04-25T09:33:57.000Z">
-<meta property="article:modified_time" content="2025-12-15T13:09:52.235Z">
+<meta property="og:image" content="http://example.com/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/image-20251221163151966.png">
+<meta property="og:image" content="http://example.com/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/image-20251221163610610.png">
+<meta property="article:published_time" content="2025-12-11T08:01:37.000Z">
+<meta property="article:modified_time" content="2025-12-21T08:41:14.798Z">
 <meta property="article:author" content="赵文琦">
-<meta property="article:tag" content="设计模式">
+<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/1.PNG#pic_center">
+<meta name="twitter:image" content="http://example.com/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/image-20251221163151966.png">
   
     <link rel="alternative" href="/atom.xml" title="赵文琦的博客" type="application/atom+xml">
   
@@ -171,7 +170,7 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-代理模式、外观模式和中介者模式区别"
+            <article id="post-大批量文件上传：前端分组并发与断点重试"
   class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -179,49 +178,53 @@
         
   
     <h1 class="article-title" itemprop="name">
-      代理模式、外观模式和中介者模式区别
+      大批量文件上传：前端分组并发与断点重试
     </h1>
   
 
           
-            <a href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2025-04-25T09:33:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-25</time>
+            <a href="/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/" class="archive-article-date">
+  	<time datetime="2025-12-11T08:01:37.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-12-11</time>
 </a>
               
       </header>
       <div class="article-entry post-count">
-        字数：507字 | 预计阅读时长：1分钟
+        字数：1.3k字 | 预计阅读时长：5分钟
       </div>
       
         <div class="article-entry" itemprop="articleBody">
           
-                    <p><strong>1.代理模式：</strong></p>
-<p>代理模式通过引入一个代理对象来控制对原对象的访问。代理对象在客户端和目标对象之间充当中介，负责将客户端的请求转发给目标对象，同时可以在转发请求前后进行额外的处理。</p>
-<h5 id="使用场景："><a href="#使用场景：" class="headerlink" title="使用场景："></a>使用场景：</h5><ul>
-<li>当需要在访问一个对象时进行一些控制或额外处理时。</li>
-</ul>
-<span id="more"></span>
+                    <p>在前端开发中，经常会有大批量文件上传的需求。在面对“数千张高清图片批量上传”的需求时，传统的前端上传方案往往会出现各种各样的问题：</p>
+<ol>
+<li><strong>一次性全部上传</strong>：极易触发服务器 <code>413 Payload Too Large</code> 报错，且巨大的 HTTP 包体容易导致连接超时。</li>
+<li><strong>暴力循环</strong>：瞬间发起数千个 HTTP 请求，不仅会挤爆浏览器的并发限制，导致大量请求排队挂起，还可能瞬间压垮后端服务。</li>
+</ol>
+<p>针对这些问题，就需要前端分批上传，下面介绍一下一种<strong>支持分组、控制并发、且具备自动重试机制</strong>的大批量文件上传策略</p>
+<h4 id="1-核心设计思路"><a href="#1-核心设计思路" class="headerlink" title="1. 核心设计思路"></a>1. 核心设计思路</h4><ol>
+<li><strong>分批</strong>： 将 大批量文件切分成若干个小批次（比如每批 50-100 个），<span id="more"></span></li>
+<li><strong>并发控制</strong>： 一次性全部并发（太卡）。我们维护一个并发池（例如限制同时 3 个请求）。当池子满了，必须等其中一个请求结束，才能塞入下一个。这最大化利用了带宽，同时保护了浏览器和服务器。</li>
+<li><strong>失败重试</strong>： 网络是不稳定的。如果某一批次失败，不应该直接报错停止，而是应该将失败的批次收集起来，在当前轮次结束后自动重试，直到达到最大重试次数。</li>
+</ol>
+<h4 id="2-代码实战"><a href="#2-代码实战" class="headerlink" title="2. 代码实战"></a>2. 代码实战</h4><p>下面是实现该逻辑的完整代码封装。我们使用了 <code>axios</code> 发送请求，利用 <code>Promise.race</code> 实现并发控制。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">handleBatchUpload</span> = <span class="keyword">async</span> (<span class="params">Files</span>) =&gt; &#123;</span><br><span class="line">      <span class="keyword">const</span> <span class="title class_">UploadFiles</span> = <span class="title class_">Array</span>.<span class="title function_">from</span>(<span class="title class_">Files</span>) <span class="comment">//将&lt;input&gt;接收到是filesList转为数组</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="title class_">UploadFiles</span>.<span class="property">length</span> === <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">      <span class="keyword">const</span> <span class="variable constant_">MAX_RETRY_ROUNDS</span> = <span class="number">3</span>;<span class="comment">// 控制失败重试次数</span></span><br><span class="line">      <span class="keyword">const</span> <span class="variable constant_">BATCH_SIZE</span> = <span class="number">50</span>; <span class="comment">// 每一组包含多少张图片</span></span><br><span class="line">      <span class="keyword">let</span> batchList = [];</span><br><span class="line"></span><br><span class="line">      <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="title class_">UploadFiles</span>.<span class="property">length</span>; i += <span class="variable constant_">BATCH_SIZE</span>) &#123;</span><br><span class="line">        <span class="comment">// slice 切割数组，生成一组</span></span><br><span class="line">        <span class="keyword">let</span> chunkFiles = <span class="title class_">UploadFiles</span>.<span class="title function_">slice</span>(i, i + <span class="variable constant_">BATCH_SIZE</span>);</span><br><span class="line">        batchList.<span class="title function_">push</span>(&#123;</span><br><span class="line">          <span class="attr">index</span>: i / <span class="variable constant_">BATCH_SIZE</span>, <span class="comment">// 批次序号</span></span><br><span class="line">          <span class="attr">files</span>: chunkFiles      <span class="comment">// 这一批包含的真实文件数组</span></span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// --- 核心函数：控制并发、分组上传、错误重试 ---</span></span><br><span class="line">      <span class="keyword">const</span> uploadBatches = <span class="keyword">async</span> <span class="keyword">function</span> (<span class="params">list, retryCount</span>) &#123;</span><br><span class="line">        <span class="comment">// 递归结束条件：列表为空</span></span><br><span class="line">        <span class="keyword">if</span> (list.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;所有批次上传完成&#x27;</span>);</span><br><span class="line">          <span class="comment">// 如果有需要，可以在这里调用合并接口，或者直接提示成功</span></span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (retryCount &gt; <span class="variable constant_">MAX_RETRY_ROUNDS</span>) &#123;</span><br><span class="line">          <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">`重试 <span class="subst">$&#123;MAX_RETRY_ROUNDS&#125;</span> 次后仍有文件失败，停止上传。失败文件:`</span>, list);</span><br><span class="line">          <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> pool = [];         <span class="comment">// 并发池</span></span><br><span class="line">        <span class="keyword">let</span> max = <span class="number">3</span>;           <span class="comment">// 最大并发量 </span></span><br><span class="line">        <span class="keyword">let</span> finish = <span class="number">0</span>;        <span class="comment">// 本轮完成的数量</span></span><br><span class="line">        <span class="keyword">let</span> failList = [];     <span class="comment">// 失败的批次列表</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`开始处理列表，剩余批次: <span class="subst">$&#123;list.length&#125;</span>`</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; list.<span class="property">length</span>; i++) &#123;</span><br><span class="line">          <span class="keyword">let</span> batchItem = list[i];</span><br><span class="line"></span><br><span class="line">          <span class="keyword">let</span> formData = <span class="keyword">new</span> <span class="title class_">FormData</span>();</span><br><span class="line">          <span class="comment">// 核心差异：这里要循环把这一组的所有文件都 append 进去</span></span><br><span class="line">          batchItem.<span class="property">files</span>.<span class="title function_">forEach</span>(<span class="function"><span class="params">file</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="comment">// &#x27;files&#x27; 必须与后端接口接收的字段名一致</span></span><br><span class="line">            formData.<span class="title function_">append</span>(<span class="string">&#x27;files&#x27;</span>, file);</span><br><span class="line">          &#125;);</span><br><span class="line">          <span class="comment">// 可以附带批次信息</span></span><br><span class="line">          formData.<span class="title function_">append</span>(<span class="string">&#x27;batchIndex&#x27;</span>, batchItem.<span class="property">index</span>);</span><br><span class="line"></span><br><span class="line">          <span class="comment">// 发起请求</span></span><br><span class="line">          <span class="keyword">let</span> task = <span class="title function_">axios</span>(&#123;</span><br><span class="line">            <span class="attr">method</span>: <span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">            <span class="attr">url</span>: <span class="string">&#x27;http://*****/upload-batch&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: formData</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          task.<span class="title function_">then</span>(<span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`批次 <span class="subst">$&#123;batchItem.index&#125;</span> 上传成功`</span>);</span><br><span class="line">            <span class="comment">// 成功后，从并发池移除</span></span><br><span class="line">            <span class="keyword">let</span> idx = pool.<span class="title function_">findIndex</span>(<span class="function"><span class="params">t</span> =&gt;</span> t === task);</span><br><span class="line">            <span class="keyword">if</span> (idx !== -<span class="number">1</span>) pool.<span class="title function_">splice</span>(idx, <span class="number">1</span>);</span><br><span class="line">          &#125;).<span class="title function_">catch</span>(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">`批次 <span class="subst">$&#123;batchItem.index&#125;</span> 上传失败`</span>, err);</span><br><span class="line">            <span class="comment">// 失败了，将整个批次加入失败列表</span></span><br><span class="line">            failList.<span class="title function_">push</span>(batchItem);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 即使失败也要从池中移除</span></span><br><span class="line">            <span class="keyword">let</span> idx = pool.<span class="title function_">findIndex</span>(<span class="function"><span class="params">t</span> =&gt;</span> t === task);</span><br><span class="line">            <span class="keyword">if</span> (idx !== -<span class="number">1</span>) pool.<span class="title function_">splice</span>(idx, <span class="number">1</span>);</span><br><span class="line">          &#125;).<span class="title function_">finally</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            finish++;</span><br><span class="line">            <span class="comment">// 当本轮所有请求都结束（无论成功失败）</span></span><br><span class="line">            <span class="keyword">if</span> (finish === list.<span class="property">length</span>) &#123;</span><br><span class="line">              <span class="comment">// 递归调用：如果有失败的，只传失败的</span></span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`本轮结束，有 <span class="subst">$&#123;failList.length&#125;</span> 个批次失败，准备重试...`</span>);</span><br><span class="line">              <span class="title function_">uploadBatches</span>(failList, retryCount + <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;);</span><br><span class="line"></span><br><span class="line">          pool.<span class="title function_">push</span>(task);</span><br><span class="line">          <span class="comment">// 并发控制：池子满了就等待最快的一个结束</span></span><br><span class="line">          <span class="keyword">if</span> (pool.<span class="property">length</span> === max) &#123;</span><br><span class="line">            <span class="keyword">await</span> <span class="title class_">Promise</span>.<span class="title function_">race</span>(pool);</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">// --- 3. 启动上传 ---</span></span><br><span class="line">      <span class="title function_">uploadBatches</span>(batchList, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/1.PNG#pic_center" alt="1"></p>
-<p><strong>2.外观模式：</strong></p>
-<p>外观模式隐藏系统的复杂性，并向客户端提供了一个客户端可以访问系统的接口。这种模式涉及到一个单一的类，该类提供了客户端请求的简化方法和对现有系统类方法的委托调用。</p>
-<h5 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h5><ul>
-<li>当客户端不需要了解系统内部的复杂逻辑和组件交互时。</li>
-<li>当需要为整个系统定义一个清晰的入口点时</li>
+<h4 id="3-关键技术点解析"><a href="#3-关键技术点解析" class="headerlink" title="3. 关键技术点解析"></a>3. 关键技术点解析</h4><h5 id="A-使用-Promise-race-控制并发"><a href="#A-使用-Promise-race-控制并发" class="headerlink" title="A. 使用 Promise.race 控制并发"></a>A. 使用 <code>Promise.race</code> 控制并发</h5><p>在 <code>for</code> 循环中，我们不断将任务推入 <code>pool</code>。</p>
+<ul>
+<li><code>pool.length === max</code> 时，意味着并发满了。</li>
+<li><code>await Promise.race(pool)</code> 会在池子中<strong>任意一个</strong>请求完成（resolve 或 reject）时立即解除阻塞。</li>
+<li>解除阻塞后，循环继续，下一个任务入池。</li>
 </ul>
-<p>以电脑开、关机为例</p>
-<p>启动电脑（按电源键）：启动CPU、启动内存、启动硬盘</p>
-<p>关闭电脑（按电源键）：关闭硬盘、关闭内存、关闭CPU</p>
-<p><img src="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/2.PNG#pic_center" alt="2"></p>
-<p><strong>3.中介者模式</strong></p>
-<p>中介者模式（Mediator Pattern）是用来降低多个对象和类之间的通信复杂性，属于行为型模式。</p>
-<p>中介者模式定义了一个中介对象来封装一系列对象之间的交互。中介者使各对象之间不需要显式地相互引用，从而使其耦合松散，且可以独立地改变它们之间的交互。</p>
-<h5 id="使用场景-1"><a href="#使用场景-1" class="headerlink" title="使用场景"></a>使用场景</h5><ul>
-<li>当系统中多个类相互耦合，形成网状结构时。</li>
-</ul>
-<p>通过聊天室实例来演示中介者模式。实例中，多个用户可以向聊天室发送消息，聊天室向所有的用户显示消息。我们将创建两个类 <em>ChatRoom</em> 和 <em>User</em>。<em>User</em> 对象使用 <em>ChatRoom</em> 方法来分享他们的消息。</p>
-<p><em>MediatorPatternDemo</em>，我们的演示类使用 <em>User</em> 对象来显示他们之间的通信</p>
-<p><img src="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/3.PNG#pic_center" alt="3"></p>
+<h5 id="B-使用递归重试"><a href="#B-使用递归重试" class="headerlink" title="B. 使用递归重试"></a>B. 使用递归重试</h5><ol>
+<li>定义 <code>failList</code> 收集本轮失败的批次。</li>
+<li>在 <code>finally</code> 中判断 <code>finish === list.length</code>（本轮是否跑完）。</li>
+<li>如果跑完了且 <code>failList</code> 有数据，直接调用 <code>uploadBatches(failList, retryCount + 1)</code>。</li>
+</ol>
+<h4 id="4-性能与稳定性分析"><a href="#4-性能与稳定性分析" class="headerlink" title="4.性能与稳定性分析"></a>4.性能与稳定性分析</h4><p>直觉认为：“一次性把所有文件扔给服务器最快，因为建立连接（TCP Handshake）的次数最少”。虽然分批上传增加了少量的 HTTP 握手开销（Overhead），但它有着<strong>极高的稳定性</strong>和<strong>用户体验的流畅度</strong>。<strong>并且合理的分批策略和并发控制反而比一次性上传更快</strong>。</p>
+<p>在真实公网的环境下，我对1000张图片进行测试，进行分批上次和一次性上传时间测试，结果如下：</p>
+<p>（1）分批上传：用时12.75s</p>
+<p><img src="/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/image-20251221163151966.png" alt="image-20251221163151966"></p>
+<p>（2）一次性上传：用时13.07s</p>
+<p><img src="/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/image-20251221163610610.png" alt="image-20251221163610610"></p>
 
                       
 
@@ -235,7 +238,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">前端</a>
         		</li>
       		
 		</ul>
@@ -292,7 +295,7 @@
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
       <img
-        src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/"
+        src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2025/12/11/%E5%A4%A7%E6%89%B9%E9%87%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%9A%E5%89%8D%E7%AB%AF%E5%88%86%E7%BB%84%E5%B9%B6%E5%8F%91%E4%B8%8E%E6%96%AD%E7%82%B9%E9%87%8D%E8%AF%95/"
         alt="微信分享二维码">
     </div>
   </div>
@@ -307,18 +310,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2025/05/23/%E7%B2%BE%E5%BA%A6%E9%97%AE%E9%A2%98%E5%AF%BC%E8%87%B4%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B%E4%B8%ADloss%E5%8F%98%E4%B8%BAnan/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JPEG 压缩预处理引发的混合精度训练 Loss Nan 问题排查
-        
-      </div>
-    </a>
   
-  
-    <a href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">设计模式中的代理模式</div>
+    <a href="/2025/11/08/%E6%B5%85%E8%B0%88%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">浅谈大模型应用开发</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -345,7 +339,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">使用场景：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">2.</span> <span class="toc-text">使用场景</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF-1"><span class="toc-number">3.</span> <span class="toc-text">使用场景</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">1. 核心设计思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%BB%A3%E7%A0%81%E5%AE%9E%E6%88%98"><span class="toc-number">2.</span> <span class="toc-text">2. 代码实战</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%85%B3%E9%94%AE%E6%8A%80%E6%9C%AF%E7%82%B9%E8%A7%A3%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text">3. 关键技术点解析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#A-%E4%BD%BF%E7%94%A8-Promise-race-%E6%8E%A7%E5%88%B6%E5%B9%B6%E5%8F%91"><span class="toc-number">3.1.</span> <span class="toc-text">A. 使用 Promise.race 控制并发</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#B-%E4%BD%BF%E7%94%A8%E9%80%92%E5%BD%92%E9%87%8D%E8%AF%95"><span class="toc-number">3.2.</span> <span class="toc-text">B. 使用递归重试</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%80%A7%E8%83%BD%E4%B8%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%88%86%E6%9E%90"><span class="toc-number">4.</span> <span class="toc-text">4.性能与稳定性分析</span></a></li></ol>
                     </div>
                 </span>
             </div>
