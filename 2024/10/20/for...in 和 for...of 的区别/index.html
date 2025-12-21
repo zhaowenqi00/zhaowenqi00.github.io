@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Tag: 设计模式 | 赵文琦的博客</title>
+  <title>for...in 和 for...of 的区别 | 赵文琦的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="赵文琦的博客">
-<meta property="og:url" content="http://example.com/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/index.html">
+  <meta name="description" content="用js刷题的时候，使用for…in遍历一个数组，结果输出的是它的索引？ for...in 遍历的是“键”（Key&#x2F;Index） for...of 遍历的是“值”（Value）  for…in：也就是 “Index”，主要用于对象（Object）的属性遍历。 for…of：也就是 “Object Value”，主要用于数组（Array）或可迭代对象的元素遍历。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="for...in 和 for...of 的区别">
+<meta property="og:url" content="http://example.com/2024/10/20/for...in%20%E5%92%8C%20for...of%20%E7%9A%84%E5%8C%BA%E5%88%AB/index.html">
 <meta property="og:site_name" content="赵文琦的博客">
+<meta property="og:description" content="用js刷题的时候，使用for…in遍历一个数组，结果输出的是它的索引？ for...in 遍历的是“键”（Key&#x2F;Index） for...of 遍历的是“值”（Value）  for…in：也就是 “Index”，主要用于对象（Object）的属性遍历。 for…of：也就是 “Object Value”，主要用于数组（Array）或可迭代对象的元素遍历。">
 <meta property="og:locale">
+<meta property="article:published_time" content="2024-10-20T03:40:04.000Z">
+<meta property="article:modified_time" content="2025-12-21T04:01:29.177Z">
 <meta property="article:author" content="赵文琦">
+<meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="赵文琦的博客" type="application/atom+xml">
@@ -162,100 +167,221 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-for...in 和 for...of 的区别"
+  class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2025-04-25T09:33:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-25</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/25/%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F%E3%80%81%E5%A4%96%E8%A7%82%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%B8%AD%E4%BB%8B%E8%80%85%E6%A8%A1%E5%BC%8F%E5%8C%BA%E5%88%AB/">代理模式、外观模式和中介者模式区别</a>
+    <h1 class="article-title" itemprop="name">
+      for...in 和 for...of 的区别
     </h1>
   
 
-        <div class="article-info info-on-right">
           
+            <a href="/2024/10/20/for...in%20%E5%92%8C%20for...of%20%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
+  	<time datetime="2024-10-20T03:40:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2024-10-20</time>
+</a>
+              
+      </header>
+      <div class="article-entry post-count">
+        字数：622字 | 预计阅读时长：2分钟
+      </div>
+      
+        <div class="article-entry" itemprop="articleBody">
+          
+                    <p>用js刷题的时候，使用for…in遍历一个数组，结果输出的是它的索引？</p>
+<p><strong><code>for...in</code> 遍历的是“键”（Key&#x2F;Index）</strong> <strong><code>for...of</code> 遍历的是“值”（Value）</strong></p>
+<ul>
+<li><strong>for…in</strong>：也就是 “Index”，主要用于对象（Object）的属性遍历。</li>
+<li><strong>for…of</strong>：也就是 “Object Value”，主要用于数组（Array）或可迭代对象的元素遍历。<span id="more"></span></li>
+</ul>
+<h3 id="1-for-in："><a href="#1-for-in：" class="headerlink" title="1. for...in："></a>1. <code>for...in</code>：</h3><p><code>for...in</code> 是 ES3 就存在的语法。它的设计初衷是<strong>遍历对象的可枚举属性</strong>。</p>
+<p>当需要获取一个对象的键名时，它是很好的选择：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> user = &#123;</span><br><span class="line">  <span class="attr">name</span>: <span class="string">&quot;tom&quot;</span>,</span><br><span class="line">  <span class="attr">age</span>: <span class="number">19</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> user) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(key); <span class="comment">// 输出: &quot;name&quot;, &quot;age&quot;</span></span><br><span class="line">  <span class="comment">//以此获取值: user[key]</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>如果用来遍历数组：</strong></p>
+<ol>
+<li>返回的是字符串索引：<code>key</code> 是 “0”, “1” 这样的字符串，而不是数字，进行运算时容易出错。</li>
+<li>顺序不确定：在某些旧浏览器或特定环境下，遍历顺序可能不保证按照数组下标顺序。</li>
+<li>原型链污染：如果数组（或 Array 原型）被添加了自定义属性，<code>for...in</code> 会把它们全都遍历出来。</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> colors = [<span class="string">&#x27;red&#x27;</span>, <span class="string">&#x27;blue&#x27;</span>];</span><br><span class="line"><span class="comment">// 给数组原型加了个方法</span></span><br><span class="line"><span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">last</span> = <span class="keyword">function</span> (<span class="params"></span>) &#123; <span class="keyword">return</span> <span class="variable language_">this</span>[<span class="variable language_">this</span>.<span class="property">length</span> - <span class="number">1</span>]; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> index <span class="keyword">in</span> colors) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(index);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 输出结果：</span></span><br><span class="line"><span class="comment">// &quot;0&quot;</span></span><br><span class="line"><span class="comment">// &quot;1&quot;</span></span><br><span class="line"><span class="comment">// &quot;last&quot;  &lt;-- 连原型上的方法都被遍历出来了！</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-for-of："><a href="#2-for-of：" class="headerlink" title="2. for...of："></a>2. <code>for...of</code>：</h3><p>为了解决 <code>for...in</code> 在数组遍历上的缺陷，ES6 引入了 <code>for...of</code>。它专门用于处理 <strong>“可迭代对象”（Iterables）</strong>，包括数组、字符串、Set、Map 等。不同于 <code>forEach</code> 方法（无法中途跳出循环），<code>for...of</code> 支持所有的循环控制语句：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> scores = [<span class="number">80</span>, <span class="number">90</span>, <span class="number">50</span>, <span class="number">70</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> score <span class="keyword">of</span> scores) &#123;</span><br><span class="line">  <span class="keyword">if</span> (score &lt; <span class="number">60</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`发现不及格: <span class="subst">$&#123;score&#125;</span>，停止检查！`</span>);</span><br><span class="line">    <span class="keyword">break</span>; <span class="comment">// 可以随时终止循环</span></span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(score);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>总结对比</strong></p>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th><strong>for…in</strong></th>
+<th><strong>for…of</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>关注点</strong></td>
+<td>属性名 (Key)</td>
+<td>属性值 (Value)</td>
+</tr>
+<tr>
+<td><strong>最适合场景</strong></td>
+<td><strong>普通对象 (Object)</strong></td>
+<td><strong>数组 (Array), 字符串, Set, Map</strong></td>
+</tr>
+<tr>
+<td><strong>原型链</strong></td>
+<td><strong>会</strong> 遍历原型链属性 (除非用 hasOwnProperty)</td>
+<td><strong>不会</strong>，只关心集合内的数据</td>
+</tr>
+<tr>
+<td><strong>数据类型</strong></td>
+<td>键通常被转换为字符串</td>
+<td>保持数据的原始类型</td>
+</tr>
+</tbody></table>
+<p><strong>建议</strong></p>
+<ol>
+<li><strong>处理数组</strong>：首选 <code>for...of</code>（或者 <code>forEach</code>、<code>map</code>）。千万别用 <code>for...in</code>。</li>
+<li><strong>处理对象</strong>：<ul>
+<li>用 <code>for...in</code>（记得加上 <code>if (obj.hasOwnProperty(key))</code> 判断）。</li>
+<li>推荐 <code>Object.keys(obj)</code> 或 <code>Object.entries(obj)</code> 配合 <code>for...of</code> 来遍历对象，这样更加语义化且安全。</li>
+</ul>
+</li>
+</ol>
+
+                      
+
+                        
+        </div>
+        <div class="article-info article-info-index">
+          
+              
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+                
 
+                  
+
+                      
+                        
+  <div class="share-btn share-icons tooltip-left">
+    <div class="tooltip tooltip-east">
+      <span class="tooltip-item">
+        <a href="javascript:;" class="share-sns share-outer">
+          <i class="icon icon-share"></i>
+        </a>
+      </span>
+      <span class="tooltip-content">
+        <div class="share-wrap">
+          <div class="share-icons">
+            <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+              <i class="icon icon-weibo"></i>
+            </a>
+            <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+              <i class="icon icon-weixin"></i>
+            </a>
+            <a class="qq share-sns" href="javascript:;" data-type="qq">
+              <i class="icon icon-qq"></i>
+            </a>
+            <a class="douban share-sns" href="javascript:;" data-type="douban">
+              <i class="icon icon-douban"></i>
+            </a>
+            <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+              <i class="icon icon-qzone"></i>
+            </a>
+            <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+              <i class="icon icon-facebook"></i>
+            </a>
+            <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+              <i class="icon icon-twitter"></i>
+            </a>
+            <a class="google share-sns" href="javascript:;" data-type="google">
+              <i class="icon icon-google"></i>
+            </a>
+          </div>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </span>
+    </div>
+  </div>
+
+  <div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img
+        src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://example.com/2024/10/20/for...in%20%E5%92%8C%20for...of%20%E7%9A%84%E5%8C%BA%E5%88%AB/"
+        alt="微信分享二维码">
+    </div>
+  </div>
+
+  <div class="mask js-mask"></div>
+                          
+                            <div class="clearfix"></div>
+        </div>
   </div>
 </article>
+
   
+<nav id="article-nav">
+  
+    <a href="/2024/11/15/webSocket/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          WebSocket学习+心跳检测+断线重连
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2024/08/31/vue%E4%B8%ADv-model%E8%AF%AD%E6%B3%95%E7%B3%96%E8%AF%A6%E8%A7%A3/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue中v-model语法糖详解</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/" class="archive-article-date">
-  	<time datetime="2025-04-22T10:55:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2025-04-22</time>
-</a>
+      <aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/04/22/%E6%B5%85%E8%B0%88%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E4%B8%AD%E7%9A%84%E4%BB%A3%E7%90%86%E6%A8%A1%E5%BC%8F/">设计模式中的代理模式</a>
-    </h1>
-  
+        
+        
+    </div>
+</aside>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
 
+        
           
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+                
 
-    
+                      
 
+                            
 
+                                
+                                      
           </div>
         </div>
       </div>
@@ -278,9 +404,9 @@
   var yiliaConfig = {
     mathjax: false,
     isHome: false,
-    isPost: false,
+    isPost: true,
       isArchive: false,
-        isTag: true,
+        isTag: false,
           isCategory: false,
             open_in_new: false,
               toc_hide_index: true,
